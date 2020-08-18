@@ -39,8 +39,8 @@ class MemoryUtils(context: Context) {
         return memoryInfo.threshold
     }
 
-    fun getAvailableMemInPercentage(): Double{
-        return (memoryInfo.availMem / memoryInfo.totalMem).toDouble() * 100
+    fun getAvailableMemInPercentage(): Int{
+        return ((memoryInfo.availMem.toDouble() / memoryInfo.totalMem) * 100).toInt()
     }
 
     companion object{

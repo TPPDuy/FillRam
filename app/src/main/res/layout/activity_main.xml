@@ -13,6 +13,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="70dp"
         android:text="@string/str_total"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="value"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/totalTitle"
         app:layout_constraintStart_toEndOf="@+id/totalTitle" />
 
@@ -32,6 +36,9 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
         android:text="@string/str_used"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/usedValue"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:text="value"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/usedTitle"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -49,7 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/str_free"
+        android:text="@string/str_available"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/totalTitle"
         app:layout_constraintTop_toBottomOf="@+id/totalTitle" />
 
@@ -58,21 +69,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="value"
+        android:textSize="@dimen/normal_text"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/freeTitle"
         app:layout_constraintTop_toTopOf="@+id/freeTitle" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <RelativeLayout
+        android:id="@+id/progressWrapper"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintVertical_bias="0.324" >
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/custom_progress_bar"
+            android:indeterminate="false"
+            android:max="100"
+            android:secondaryProgress="0" />
+        <TextView
+            android:id="@+id/progressPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn100"
@@ -82,7 +111,7 @@
         android:layout_marginTop="45dp"
         android:text="+100MB"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/progressWrapper" />
 
     <Button
         android:id="@+id/btn200"

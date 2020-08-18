@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FillRamMemory</string>
     <string name="str_total">Total:</string>
-    <string name="str_free">Free:</string>
+    <string name="str_available">Available:</string>
     <string name="str_used">Used:</string>
     <string name="str_custom">Custom</string>
     <string name="str_unit_mb">MB</string>
