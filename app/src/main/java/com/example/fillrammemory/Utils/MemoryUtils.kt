@@ -46,11 +46,17 @@ class MemoryUtils(context: Context) {
     companion object{
         private const val MBToKB = 1024.0
         private const val GBToKB = 1024.0 * 1024.0
+        private var instance: MemoryUtils? = null
+        fun getInstance(context: Context): MemoryUtils{
+            if (instance == null)
+                instance = MemoryUtils(context)
+            return instance as MemoryUtils
+        }
 
-        private fun formatToString(value: Double): String {
+        fun formatToString(value: Double): String {
             val twoDecimalFormat: DecimalFormat = DecimalFormat("#.##")
-            val mbValue = value / MBToKB
-            val gbValue = value / GBToKB
+            val mbValue = value.div(1024).div(MBToKB)
+            val gbValue = value.div(1024).div(GBToKB)
             val result : String
             result = if (gbValue > 1) {
                 twoDecimalFormat.format(gbValue).plus(" GB")

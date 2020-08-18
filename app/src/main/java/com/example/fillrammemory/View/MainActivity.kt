@@ -1,55 +1,31 @@
 package com.example.fillrammemory.View
-
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fillrammemory.R
-import com.example.fillrammemory.Utils.Constants
-import com.example.fillrammemory.Utils.GetMemoryThread
 import com.example.fillrammemory.Utils.MemoryUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), Runnable, Handler.Callback{
-    val getInfoThread = GetMemoryThread("MEMORY_INFO_THREAD")
-    private val handler = Handler(Looper.getMainLooper(), this)
+class MainActivity : AppCompatActivity(), Runnable{
+
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var memoryUtils: MemoryUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        memoryUtils = MemoryUtils.getInstance(this)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        handler.post(this)
     }
 
     override fun run() {
-        /*
-        val totalMemInfo = MemoryUtils.readRamFromSystem(1)
-        val freeMemInfo = MemoryUtils.readRamFromSystem(2)
-
-        val msg1 = Message()
-        val msg2 = Message()
-        msg1.what = Constants.MSG_UPDATE_TOTAL_MEM
-        msg1.obj = totalMemInfo
-        msg2.what = Constants.MSG_UPDATE_FREE_MEM
-        msg2.obj = freeMemInfo
-
-        handler.sendMessage(msg1)
-        handler.sendMessage(msg2)
-        */
-    }
-
-    override fun handleMessage(msg: Message): Boolean {
-        when(msg.what){
-            Constants.MSG_UPDATE_TOTAL_MEM -> {
-                totalValue.text = msg.obj as String
-                return true
-            }
-            Constants.MSG_UPDATE_FREE_MEM -> {
-                freeValue.text = msg.obj as String
-                return true
-            }
-            Constants.MSG_UPDATE_USED_MEM -> {
-                usedValue.text = msg.obj as String
-                return true
-            }
-        }
-        return false
+        memoryUtils.updateMemInfo()
+        totalValue.text = MemoryUtils.formatToString(memoryUtils.getTotalRam().toDouble())
+        freeValue.text = MemoryUtils.formatToString(memoryUtils.getAvailableRam().toDouble())
+        usedValue.text = MemoryUtils.formatToString((memoryUtils.getTotalRam().minus(memoryUtils.getAvailableRam())).toDouble())
+        handler.postDelayed(this, 500)
     }
 }

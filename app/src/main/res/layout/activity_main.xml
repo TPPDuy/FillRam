@@ -37,8 +37,8 @@
 
     <TextView
         android:id="@+id/usedValue"
-        android:layout_width="28dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:text="value"
         app:layout_constraintBaseline_toBaselineOf="@+id/usedTitle"
@@ -88,9 +88,11 @@
         android:id="@+id/btn200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:text="+200MB"
         app:layout_constraintEnd_toStartOf="@+id/btn400"
+        app:layout_constraintStart_toEndOf="@+id/btn100"
         app:layout_constraintTop_toTopOf="@+id/btn100" />
 
     <Button
@@ -116,7 +118,9 @@
         android:id="@+id/btn700"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:text="+700MB"
         app:layout_constraintEnd_toStartOf="@+id/btn1"
         app:layout_constraintStart_toEndOf="@+id/btn500"

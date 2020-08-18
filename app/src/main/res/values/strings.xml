@@ -5,7 +5,7 @@
     <string name="str_used">Used:</string>
     <string name="str_custom">Custom</string>
     <string name="str_unit_mb">MB</string>
-    <strinng name="str_unit_gb">GB</strinng>
+    <string name="str_unit_gb">GB</string>
     <string name="str_input_placeholder">Enter size and choose unit</string>
     <string name="str_accept">Accept</string>
     <string-array name="spinner_unit_value">
