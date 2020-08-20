@@ -2,9 +2,14 @@ package com.example.fillrammemory.Utils
 
 import android.app.ActivityManager
 import android.content.Context
+import android.util.Log
+import com.example.fillrammemory.Services.MemoryService
+import com.example.fillrammemory.Utils.Constants.Companion.GB_TO_BYTES
+import com.example.fillrammemory.Utils.Constants.Companion.MB_TO_BYTES
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.text.DecimalFormat
+import java.util.*
 import java.util.regex.Pattern
 
 class MemoryUtils(context: Context) {
@@ -19,7 +24,7 @@ class MemoryUtils(context: Context) {
         updateMemInfo()
     }
 
-    fun updateMemInfo(){
+    fun  updateMemInfo(){
         activityManager.getMemoryInfo(memoryInfo)
     }
 
@@ -43,20 +48,35 @@ class MemoryUtils(context: Context) {
         return ((memoryInfo.availMem.toDouble() / memoryInfo.totalMem) * 100).toInt()
     }
 
+    fun increaseMemory(value: Int){
+        updateMemInfo()
+        Log.d(MemoryService.TAG + "Total Memory:  ", formatToString(memoryInfo.totalMem.toDouble()))
+        var byte: ByteArray = ByteArray(convertMBToBytes(value))
+        v.add(byte)
+
+        Log.d(MemoryService.TAG, "$value has ${byte.size} size")
+        Log.d(MemoryService.TAG, "The numbers of size elements: ${v.size} ")
+        Log.d(MemoryService.TAG + "Free Memory:  ", formatToString(memoryInfo.availMem.toDouble()))
+
+    }
+
+    fun convertMBToBytes(mbValue: Int): Int {
+        return mbValue * MB_TO_BYTES;
+    }
+    fun convertGBToBytes(mbValue: Int): Int {
+        return mbValue * GB_TO_BYTES;
+    }
+
     companion object{
         private const val MBToKB = 1024.0
         private const val GBToKB = 1024.0 * 1024.0
+        private var v: Vector<Any> = Vector<Any>()
+
         private var instance: MemoryUtils? = null
         fun getInstance(context: Context): MemoryUtils{
             if (instance == null)
                 instance = MemoryUtils(context)
             return instance as MemoryUtils
-        }
-        fun increaseMemory(value: Int){
-            var byte: ByteArray = ByteArray(value)
-            var list: ArrayList<ByteArray> = ArrayList<ByteArray>()
-            list.add(byte)
-
         }
 
         fun formatToString(value: Double): String {

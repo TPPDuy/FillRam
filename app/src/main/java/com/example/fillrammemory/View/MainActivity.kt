@@ -1,10 +1,8 @@
 package com.example.fillrammemory.View
 import android.content.Intent
 import android.os.*
-import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fillrammemory.R
 import com.example.fillrammemory.Services.MemoryService
@@ -34,9 +32,7 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         btn700.setOnClickListener(this)
         val btn1 = findViewById<Button>(R.id.btn1)
         btn1.setOnClickListener(this)
-
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -52,42 +48,32 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         progressPercentage.text = "${memoryUtils.getAvailableMemInPercentage()}%"
         handler.postDelayed(this, 500)
     }
-    fun sendValueToService(value: Int) {
+
+    fun handleIncreaseMem(value: Int) {
         val intent = Intent(this, MemoryService::class.java)
         intent.putExtra("value", value)
         MemoryService.enqueueWork(this, intent)
-
     }
     override fun onClick(v: View?) {
         val itemId = v?.id
         when (itemId) {
             R.id.btn100 -> {
-                sendValueToService(100)
-                Toast.makeText(this, "Btn 100MB Click", Toast.LENGTH_LONG).show()
+                handleIncreaseMem(100)
             }
             R.id.btn200 -> {
-                sendValueToService(200)
-                Toast.makeText(this, "Btn 200MB Click", Toast.LENGTH_LONG).show()
-
+                handleIncreaseMem(200)
             }
             R.id.btn400 -> {
-                sendValueToService(400)
-                Toast.makeText(this, "Btn 400MB Click", Toast.LENGTH_LONG).show()
-
+                handleIncreaseMem(400)
             }
             R.id.btn500 -> {
-                sendValueToService(500)
-                Toast.makeText(this, "Btn 500MB Click", Toast.LENGTH_LONG).show()
-
+                handleIncreaseMem(500)
             }
             R.id.btn700 -> {
-                sendValueToService(700)
-                Toast.makeText(this, "Btn 700MB Click", Toast.LENGTH_LONG).show()
-
+                handleIncreaseMem(700)
             }
             R.id.btn1 -> {
-                sendValueToService(0)
-
+                handleIncreaseMem(0)
             }
         }
     }
