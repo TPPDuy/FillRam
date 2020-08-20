@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         handler.postDelayed(this, 500)
     }
 
-    fun handleIncreaseMem(value: Int) {
+    fun handleIncreaseMem(value: String) {
         val intent = Intent(this, MemoryService::class.java)
         intent.putExtra("value", value)
         MemoryService.enqueueWork(this, intent)
@@ -58,22 +58,22 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         val itemId = v?.id
         when (itemId) {
             R.id.btn100 -> {
-                handleIncreaseMem(100)
+                handleIncreaseMem("100 MB")
             }
             R.id.btn200 -> {
-                handleIncreaseMem(200)
+                handleIncreaseMem("200 MB")
             }
             R.id.btn400 -> {
-                handleIncreaseMem(400)
+                handleIncreaseMem("400 MB")
             }
             R.id.btn500 -> {
-                handleIncreaseMem(500)
+                handleIncreaseMem("500 MB")
             }
             R.id.btn700 -> {
-                handleIncreaseMem(700)
+                handleIncreaseMem("700 MB")
             }
             R.id.btn1 -> {
-                handleIncreaseMem(0)
+                handleIncreaseMem("1 GB")
             }
         }
     }

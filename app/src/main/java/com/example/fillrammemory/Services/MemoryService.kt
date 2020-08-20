@@ -15,8 +15,8 @@ class MemoryService : JobIntentService() {
     }
 
     override fun onHandleWork(intent: Intent) {
-        val value = intent.getIntExtra("value", -1)
-        Log.d(TAG, "Running Service, add number: ")
+        val value = intent.getStringExtra("value")
+        Log.d(TAG, "Running Service, increase size of Ram ")
         MemoryUtils.getInstance(this).increaseMemory(value)
     }
 

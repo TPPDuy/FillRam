@@ -4,8 +4,6 @@ import android.app.ActivityManager
 import android.content.Context
 import android.util.Log
 import com.example.fillrammemory.Services.MemoryService
-import com.example.fillrammemory.Utils.Constants.Companion.GB_TO_BYTES
-import com.example.fillrammemory.Utils.Constants.Companion.MB_TO_BYTES
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.text.DecimalFormat
@@ -48,10 +46,36 @@ class MemoryUtils(context: Context) {
         return ((memoryInfo.availMem.toDouble() / memoryInfo.totalMem) * 100).toInt()
     }
 
-    fun increaseMemory(value: Int){
+    fun convertMBToBytes(mbValue: Int): Int {
+        return mbValue * MBToB;
+    }
+    fun convertGBToBytes(mbValue: Int): Int {
+        return mbValue * GBToB;
+    }
+
+    fun handleValueInput(strValue: String) : Int {
+        val match = Regex("(\\d+) (\\w+)").find(strValue)!!
+        val (value, unit) = match.destructured
+        //Log.d(MemoryService.TAG, "$value has ${unit} unit")
+        var convertValue: Int = 0
+        when (unit) {
+            "KB" -> {}
+            "MB" -> {
+                convertValue = convertMBToBytes(value.toInt())
+            }
+            "GB" -> {
+                convertValue = convertGBToBytes(value.toInt())
+            }
+        }
+        return convertValue;
+    }
+
+    fun increaseMemory(strValue: String){
         updateMemInfo()
+
+        val value = handleValueInput(strValue);
         Log.d(MemoryService.TAG + "Total Memory:  ", formatToString(memoryInfo.totalMem.toDouble()))
-        var byte: ByteArray = ByteArray(convertMBToBytes(value))
+        var byte: ByteArray = ByteArray(value)
         v.add(byte)
 
         Log.d(MemoryService.TAG, "$value has ${byte.size} size")
@@ -60,16 +84,11 @@ class MemoryUtils(context: Context) {
 
     }
 
-    fun convertMBToBytes(mbValue: Int): Int {
-        return mbValue * MB_TO_BYTES;
-    }
-    fun convertGBToBytes(mbValue: Int): Int {
-        return mbValue * GB_TO_BYTES;
-    }
-
     companion object{
         private const val MBToKB = 1024.0
         private const val GBToKB = 1024.0 * 1024.0
+        private const val MBToB = 1024 * 1024
+        private const val GBToB = 1024 * 1024 * 1024
         private var v: Vector<Any> = Vector<Any>()
 
         private var instance: MemoryUtils? = null
