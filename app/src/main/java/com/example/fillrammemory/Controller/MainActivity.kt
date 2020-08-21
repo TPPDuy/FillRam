@@ -1,6 +1,5 @@
-package com.example.fillrammemory.View
+package com.example.fillrammemory.Controller
 import android.os.*
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fillrammemory.R
 import com.example.fillrammemory.Utils.MemoryUtils
