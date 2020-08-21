@@ -10,6 +10,7 @@ class MemoryService : JobIntentService() {
      override fun onCreate() {
          super.onCreate()
          Log.d(TAG, "Service Execution Started... ")
+         MemoryUtils.getInstance(this).getMemoryInfo()
     }
 
     override fun onHandleWork(intent: Intent) {
@@ -21,6 +22,7 @@ class MemoryService : JobIntentService() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "Service Execution Finish... ")
+        MemoryUtils.getInstance(this).getMemoryInfo()
     }
 
     companion object {

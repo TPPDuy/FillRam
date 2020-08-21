@@ -8,7 +8,6 @@ import java.io.IOException
 import java.io.RandomAccessFile
 import java.lang.Exception
 import java.text.DecimalFormat
-import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
@@ -19,6 +18,7 @@ class MemoryUtils(context: Context) {
     */
     private var activityManager: ActivityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
     private val memoryInfo = ActivityManager.MemoryInfo()
+    private val runtime: Runtime = Runtime.getRuntime()
 
     init{
         updateMemInfo()
@@ -58,7 +58,6 @@ class MemoryUtils(context: Context) {
     private fun handleValueInput(strValue: String) : Int {
         val match = Regex("(\\d+) (\\w+)").find(strValue)!!
         val (value, unit) = match.destructured
-        //Log.d(MemoryService.TAG, "$value has ${unit} unit")
         var convertValue: Int = 0
         when (unit) {
             "KB" -> {}
@@ -73,19 +72,34 @@ class MemoryUtils(context: Context) {
     }
 
     fun increaseMemory(strValue: String){
-        val value = handleValueInput(strValue);
-        // Log.d(MemoryService.TAG + "Total Memory:  ", formatToString(memoryInfo.totalMem.toDouble()))
+        val value = handleValueInput(strValue)
         try{
             val byte: ByteArray = ByteArray(value)
-            v.add(byte)
+            Log.d(MemoryService.TAG, "Increase ${formatToString(value.toDouble())} \n")
+            mAllocations.add(byte)
         } catch(e: Exception){
             e.printStackTrace()
         }
 
-        // Log.d(MemoryService.TAG, "$value has ${byte.size} size")
-        // Log.d(MemoryService.TAG, "The numbers of size elements: ${v.size} ")
-        // Log.d(MemoryService.TAG + "Free Memory:  ", formatToString(memoryInfo.availMem.toDouble()))
+//        if (isMemoryAvailable()) {
+//            val byte: ByteArray = ByteArray(value)
+//            v.add(byte)
+//        }
+//        try{
+//            Thread.sleep(1000)
+//        } catch(e: Exception){
+//            e.printStackTrace()
+//        }
 
+    }
+
+    fun getMemoryInfo() {
+        val info = " Available Memory =  ${formatToString(memoryInfo.availMem.toDouble())}\n" +
+                "  Total Memory = ${formatToString(memoryInfo.totalMem.toDouble())}\n" +
+                "  Runtime Max Memory =  ${formatToString(runtime.maxMemory().toDouble())}\n" +
+                "  Runtime Total Memory = ${formatToString(runtime.totalMemory().toDouble())}\n" +
+                "  Runtime Free Memory = ${formatToString(runtime.freeMemory().toDouble())}"
+        Log.d(MemoryService.TAG , info)
     }
 
     companion object{
@@ -93,7 +107,7 @@ class MemoryUtils(context: Context) {
         private const val GBToKB = 1024.0 * 1024.0
         private const val MBToB = 1024 * 1024
         private const val GBToB = 1024 * 1024 * 1024
-        private var v: ArrayList<Any> = ArrayList()
+        private var mAllocations: ArrayList<Any> = ArrayList()
 
         private var instance: MemoryUtils? = null
         fun getInstance(context: Context): MemoryUtils{
@@ -146,6 +160,14 @@ class MemoryUtils(context: Context) {
                 exception.printStackTrace()
                 return 0.0
             }
+        }
+
+        fun isMemoryAvailable() : Boolean {
+            val freeMemoryPercent = 100 - (Runtime.getRuntime().totalMemory() / Runtime.getRuntime().maxMemory().toFloat()) * 100
+            if ( freeMemoryPercent > 10) {
+                return true
+            }
+            return false
         }
     }
 }
