@@ -74,17 +74,18 @@ class MemoryUtils(context: Context) {
 
     fun increaseMemory(strValue: String){
         val value = handleValueInput(strValue);
-        // Log.d(MemoryService.TAG + "Total Memory:  ", formatToString(memoryInfo.totalMem.toDouble()))
+         Log.d(MemoryService.TAG + "Total Memory:  ", formatToString(memoryInfo.totalMem.toDouble()))
         try{
             val byte: ByteArray = ByteArray(value)
             v.add(byte)
+            Log.d(MemoryService.TAG, "$value has ${byte.size} size")
+
         } catch(e: Exception){
             e.printStackTrace()
         }
 
-        // Log.d(MemoryService.TAG, "$value has ${byte.size} size")
-        // Log.d(MemoryService.TAG, "The numbers of size elements: ${v.size} ")
-        // Log.d(MemoryService.TAG + "Free Memory:  ", formatToString(memoryInfo.availMem.toDouble()))
+        Log.d(MemoryService.TAG, "The numbers of size elements: ${v.size} ")
+        Log.d(MemoryService.TAG + "Free Memory:  ", formatToString(memoryInfo.availMem.toDouble()))
 
     }
 

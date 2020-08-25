@@ -9,13 +9,23 @@ import com.example.fillrammemory.Services.MemoryService
 import com.example.fillrammemory.Utils.MemoryUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import android.text.format.Formatter
+import android.util.Log
+import java.nio.ByteBuffer
 
 class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var memoryUtils: MemoryUtils
 
-
+    companion object{
+        init {
+            try{
+                System.loadLibrary("nativeLib")
+            } catch(e: UnsatisfiedLinkError){
+                e.printStackTrace()
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,9 +62,12 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
     }
 
     private fun handleIncreaseMem(value: String) {
-        val intent = Intent(this, MemoryService::class.java)
+        /*val intent = Intent(this, MemoryService::class.java)
         intent.putExtra("value", value)
-        MemoryService.enqueueWork(this, intent)
+        MemoryService.enqueueWork(this, intent)*/
+        val arr = varGenerator(1024*1024*500)
+        val dataSize = arr?.remaining()?.div((1024*1024))
+        Log.d("Data size: ", dataSize.toString())
     }
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -78,4 +91,6 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
             }
         }
     }
+
+    private external fun varGenerator(size: Long): ByteBuffer?
 }
