@@ -48,38 +48,25 @@ class MemoryUtils(context: Context) {
         return ((memoryInfo.availMem.toDouble() / memoryInfo.totalMem) * 100).toInt()
     }
 
-    private fun convertMBToBytes(mbValue: Int): Int {
-        return mbValue * MBToB;
+    private fun convertMBToBytes(mbValue: Int): Long {
+        return (mbValue * MBToB).toLong();
     }
-    private fun convertGBToBytes(mbValue: Int): Int {
-        return mbValue * GBToB;
+    private fun convertGBToBytes(mbValue: Int): Long {
+        return (mbValue * GBToB).toLong();
     }
 
-    private fun handleValueInput(strValue: String) : Int {
-        val match = Regex("(\\d+) (\\w+)").find(strValue)!!
-        val (value, unit) = match.destructured
-        var convertValue: Int = 0
+    fun convertValueToBytes(value: Int, unit: String) : Long {
+        var convertValue: Long = 0
         when (unit) {
             "KB" -> {}
             "MB" -> {
-                convertValue = convertMBToBytes(value.toInt())
+                convertValue = convertMBToBytes(value)
             }
             "GB" -> {
-                convertValue = convertGBToBytes(value.toInt())
+                convertValue = convertGBToBytes(value)
             }
         }
         return convertValue;
-    }
-
-    fun increaseMemory(strValue: String){
-        val value = handleValueInput(strValue)
-        try{
-            val byte: ByteArray = ByteArray(value)
-            Log.d(MemoryService.TAG, "Increase ${formatToString(value.toDouble())} \n")
-            mAllocations.add(byte)
-        } catch(e: Exception){
-            e.printStackTrace()
-        }
     }
 
     fun getMemoryInfo() {
@@ -149,14 +136,6 @@ class MemoryUtils(context: Context) {
                 exception.printStackTrace()
                 return 0.0
             }
-        }
-
-        fun isMemoryAvailable() : Boolean {
-            val freeMemoryPercent = 100 - (Runtime.getRuntime().totalMemory() / Runtime.getRuntime().maxMemory().toFloat()) * 100
-            if ( freeMemoryPercent > 10) {
-                return true
-            }
-            return false
         }
     }
 }

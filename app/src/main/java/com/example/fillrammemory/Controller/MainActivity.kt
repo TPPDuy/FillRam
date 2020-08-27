@@ -10,6 +10,7 @@ import com.example.fillrammemory.Utils.MemoryUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import android.text.format.Formatter
 import android.util.Log
+import com.example.fillrammemory.Utils.Constants
 import java.nio.ByteBuffer
 
 class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
@@ -17,15 +18,6 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var memoryUtils: MemoryUtils
 
-    companion object{
-        init {
-            try{
-                System.loadLibrary("nativeLib")
-            } catch(e: UnsatisfiedLinkError){
-                e.printStackTrace()
-            }
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,36 +53,33 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         handler.postDelayed(this, 500)
     }
 
-    private fun handleIncreaseMem(value: String) {
-        /*val intent = Intent(this, MemoryService::class.java)
-        intent.putExtra("value", value)
-        MemoryService.enqueueWork(this, intent)*/
-        val arr = varGenerator(1024*1024*500)
-        val dataSize = arr?.remaining()?.div((1024*1024))
-        Log.d("Data size: ", dataSize.toString())
+    private fun handleIncreaseMem(value: Int, unit: String) {
+        val intent = Intent(this, MemoryService::class.java)
+        intent.putExtra(Constants.MSG_VALUE, value)
+        intent.putExtra(Constants.MSG_UNIT, unit)
+        MemoryService.enqueueWork(this, intent)
     }
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn100 -> {
-                handleIncreaseMem("100 MB")
+                handleIncreaseMem(100,"MB" )
             }
             R.id.btn200 -> {
-                handleIncreaseMem("200 MB")
+                handleIncreaseMem(200, "MB")
             }
             R.id.btn400 -> {
-                handleIncreaseMem("400 MB")
+                handleIncreaseMem(400, "MB")
             }
             R.id.btn500 -> {
-                handleIncreaseMem("500 MB")
+                handleIncreaseMem(500, "MB")
             }
             R.id.btn700 -> {
-                handleIncreaseMem("700 MB")
+                handleIncreaseMem(700, "MB")
             }
             R.id.btn1 -> {
-                handleIncreaseMem("1 GB")
+                handleIncreaseMem(1,"GB")
             }
         }
     }
 
-    private external fun varGenerator(size: Long): ByteBuffer?
 }
