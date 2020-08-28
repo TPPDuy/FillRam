@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="normal_text">16sp</dimen>
+    <dimen name="small_text">14sp</dimen>
+    <dimen name="normal_text">18sp</dimen>
+    <dimen name="medium_text">24sp</dimen>
+    <dimen name="small_space">8dp</dimen>
+    <dimen name="normal_space">16dp</dimen>
+    <dimen name="medium_space">24dp</dimen>
+    <dimen name="large_space">32dp</dimen>
+    <dimen name="extra_large_space">45dp</dimen>
+    <dimen name="huge_space">280dp</dimen>
+    <dimen name="normal_radius">5dp</dimen>
 </resources>
