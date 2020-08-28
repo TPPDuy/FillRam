@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                 return;
             }
             Log.d("THREAD ",  msg.toString())
+
             val memoryInfo: Memory = msg.obj as Memory;
             activity.totalValue.text = Formatter.formatFileSize(activity, memoryInfo.total)
             activity.freeValue.text = Formatter.formatFileSize(activity, memoryInfo.available)
