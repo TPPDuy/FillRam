@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Controller.MainActivity">
+    tools:context=".Controllers.MainActivity">
 
     <fragment
         android:id="@+id/nav_host_fragment"

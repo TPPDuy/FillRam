@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
         android:largeHeap="true">
-        <activity android:name=".Controller.MainActivity">
+        <activity android:name=".Controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

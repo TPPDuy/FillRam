@@ -1,4 +1,4 @@
-package com.example.fillrammemory.Controller
+package com.example.fillrammemory.Controllers
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

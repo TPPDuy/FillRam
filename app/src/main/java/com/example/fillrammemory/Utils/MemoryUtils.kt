@@ -70,11 +70,11 @@ class MemoryUtils(context: Context) {
     }
 
     fun getMemoryInfo() {
-        val info = " Available Memory =  ${formatToString(memoryInfo.availMem.toDouble())}\n" +
-                "  Total Memory = ${formatToString(memoryInfo.totalMem.toDouble())}\n" +
-                "  Runtime Max Memory =  ${formatToString(runtime.maxMemory().toDouble())}\n" +
-                "  Runtime Total Memory = ${formatToString(runtime.totalMemory().toDouble())}\n" +
-                "  Runtime Free Memory = ${formatToString(runtime.freeMemory().toDouble())}"
+        val info = " Available Memory =  ${formatToString(memoryInfo.availMem)}\n" +
+                "  Total Memory = ${formatToString(memoryInfo.totalMem)}\n" +
+                "  Runtime Max Memory =  ${formatToString(runtime.maxMemory())}\n" +
+                "  Runtime Total Memory = ${formatToString(runtime.totalMemory())}\n" +
+                "  Runtime Free Memory = ${formatToString(runtime.freeMemory())}"
         Log.d(MemoryService.TAG , info)
     }
 
@@ -92,7 +92,7 @@ class MemoryUtils(context: Context) {
             return instance as MemoryUtils
         }
 
-        fun formatToString(value: Double): String {
+        fun formatToString(value: Long): String {
             val twoDecimalFormat: DecimalFormat = DecimalFormat("#.##")
             val mbValue = value.div(1024).div(MBToKB)
             val gbValue = value.div(1024).div(GBToKB)
