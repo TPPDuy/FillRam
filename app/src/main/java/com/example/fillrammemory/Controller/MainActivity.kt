@@ -1,27 +1,33 @@
 package com.example.fillrammemory.Controller
 import android.os.*
 import android.content.Intent
+import android.text.format.Formatter
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fillrammemory.R
 import com.example.fillrammemory.Services.MemoryService
-import com.example.fillrammemory.Utils.MemoryUtils
-import kotlinx.android.synthetic.main.activity_main.*
-import android.text.format.Formatter
 import android.util.Log
+import android.widget.TextView
 import com.example.fillrammemory.Utils.Constants
-import java.nio.ByteBuffer
+import com.example.fillrammemory.Utils.GetMemoryThread
+import com.example.fillrammemory.Utils.MemoryRunnable
+import com.example.fillrammemory.model.Memory
+import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.ref.WeakReference
 
-class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
+class MainActivity : AppCompatActivity(), View.OnClickListener{
 
-    private val handler = Handler(Looper.getMainLooper())
-    private lateinit var memoryUtils: MemoryUtils
+    private lateinit var memoryRunnable: MemoryRunnable
+    private lateinit var getMemoryThread: GetMemoryThread
+    private lateinit var uiHandler: UiHandler
+
+    private lateinit var textTotal: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        memoryUtils = MemoryUtils.getInstance(this)
+
 
         val btn100 = findViewById<Button>(R.id.btn100)
         btn100.setOnClickListener(this)
@@ -35,22 +41,24 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
         btn700.setOnClickListener(this)
         val btn1 = findViewById<Button>(R.id.btn1)
         btn1.setOnClickListener(this)
+
+        uiHandler = UiHandler()
+        uiHandler.setActivityRef(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        getMemoryThread = GetMemoryThread("GetMemoryThread", uiHandler)
+        getMemoryThread.start()
+
+        memoryRunnable = MemoryRunnable(getMemoryThread, this)
+        memoryRunnable.start()
+
     }
 
     override fun onResume() {
         super.onResume()
-        handler.post(this)
-    }
-
-    override fun run() {
-        memoryUtils.updateMemInfo()
-        // totalValue.text = MemoryUtils.formatToString(memoryUtils.getTotalRam().toDouble())
-        totalValue.text = Formatter.formatFileSize(this, memoryUtils.getTotalRam())
-        freeValue.text = Formatter.formatFileSize(this, memoryUtils.getAvailableRam())
-        usedValue.text = Formatter.formatFileSize(this, (memoryUtils.getTotalRam().minus(memoryUtils.getAvailableRam())))
-        progressBar.progress = memoryUtils.getAvailableMemInPercentage()
-        progressPercentage.text = "${memoryUtils.getAvailableMemInPercentage()}%"
-        handler.postDelayed(this, 500)
     }
 
     private fun handleIncreaseMem(value: Int, unit: String) {
@@ -81,5 +89,31 @@ class MainActivity : AppCompatActivity(), Runnable, View.OnClickListener{
             }
         }
     }
+    class UiHandler : Handler() {
+        private lateinit var mActivityRef: WeakReference<MainActivity>
+
+        fun setActivityRef(mainActivity: MainActivity) {
+            mActivityRef = WeakReference(mainActivity)
+        }
+
+
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            val activity = mActivityRef.get()
+            if (activity == null || activity.isFinishing || activity.isDestroyed) {
+                removeCallbacksAndMessages(null)
+                return;
+            }
+            Log.d("THREAD ",  msg.toString())
+            val memoryInfo: Memory = msg.obj as Memory;
+            activity.totalValue.text = Formatter.formatFileSize(activity, memoryInfo.total)
+            activity.freeValue.text = Formatter.formatFileSize(activity, memoryInfo.available)
+            activity.usedValue.text = Formatter.formatFileSize(activity, (memoryInfo.total.minus(memoryInfo.available)))
+            activity.progressBar.progress = memoryInfo.availablePercent
+            activity.progressPercentage.text = "${ memoryInfo.availablePercent}%"
+        }
+
+    }
 
 }
+

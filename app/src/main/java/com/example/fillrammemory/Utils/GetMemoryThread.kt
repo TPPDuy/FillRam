@@ -6,16 +6,38 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
+import android.util.Log
+import com.example.fillrammemory.Services.MemoryService
+import com.example.fillrammemory.model.Memory
 
-class GetMemoryThread(threadName: String) : HandlerThread(threadName) {
+class GetMemoryThread(threadName: String, private var mUiHandler: Handler) : HandlerThread(threadName){
 
-    lateinit var handler: Handler
+   private var mHandler: Handler?=null
 
     override fun onLooperPrepared() {
         super.onLooperPrepared()
-        handler = object : Handler(Looper.getMainLooper()) {
+        mHandler = getHandler(looper)
+    }
+
+    fun sendMemoryInfo(memoryInfo: Memory) {
+        val message = Message()
+        message.obj = memoryInfo
+        mHandler?.sendMessage(message)
+    }
+
+    private fun getHandler(looper: Looper?): Handler? {
+        return object : Handler(looper){
             override fun handleMessage(msg: Message) {
+                super.handleMessage(msg)
+                val memoryInfo = msg?.obj as Memory
+                val processedMessage = Message()
+                processedMessage.obj = memoryInfo
+                mUiHandler.sendMessage(processedMessage)
             }
         }
+
+
     }
+
+
 }

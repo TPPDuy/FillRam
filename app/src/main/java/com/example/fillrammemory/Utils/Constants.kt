@@ -8,5 +8,8 @@ class Constants {
 
         const val MSG_VALUE = "value"
         const val MSG_UNIT = "unit"
+
+        const val GET_MEMORY_INFO = 100
+        const val RECEIVE_MEMORY_INFO = 200
     }
 }
