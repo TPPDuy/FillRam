@@ -82,7 +82,6 @@ class MemoryUtils(context: Context) {
         private const val GBToKB = 1024.0 * 1024.0
         private const val MBToB = 1024 * 1024
         private const val GBToB = 1024 * 1024 * 1024
-        private var mAllocations: ArrayList<Any> = ArrayList()
 
         private var instance: MemoryUtils? = null
         fun getInstance(context: Context): MemoryUtils{

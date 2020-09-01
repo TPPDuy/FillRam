@@ -141,7 +141,7 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
 //        toast.duration = Toast.LENGTH_LONG
 //        toast.setText(info)
 //        toast.show()
-       Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
         handleIncreaseMem(value, unit)
     }
 }
