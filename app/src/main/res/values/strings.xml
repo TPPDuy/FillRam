@@ -16,6 +16,7 @@
     <string name="str_input_placeholder">Enter size and select unit</string>
     <string name="str_accept">Accept</string>
     <string name="str_free_mem">Free Now</string>
+    <string name="str_free_vars_success">Free all allocated variables successfully</string>
     <string-array name="spinner_unit_value">
         <item>KB</item>
         <item>MB</item>

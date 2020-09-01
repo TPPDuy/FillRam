@@ -3,7 +3,10 @@ package com.example.fillrammemory.Services
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.core.app.JobIntentService
+import com.example.fillrammemory.R
 import com.example.fillrammemory.Utils.Constants
 import com.example.fillrammemory.Utils.MemoryUtils
 import java.nio.ByteBuffer
@@ -33,6 +36,7 @@ class MemoryService : JobIntentService() {
                 for (buff in mAllocations){
                     freeVar(buff)
                 }
+                Toast.makeText(applicationContext, getString(R.string.str_free_vars_success), LENGTH_SHORT).show()
             }
         }
     }

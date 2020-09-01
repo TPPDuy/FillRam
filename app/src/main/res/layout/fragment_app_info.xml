@@ -141,7 +141,9 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:padding="@dimen/small_space"
-        android:background="@drawable/round_corner_background">
+        android:clickable="true"
+        android:background="@drawable/round_corner_background"
+        android:focusable="true">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
