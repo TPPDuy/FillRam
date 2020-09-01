@@ -24,8 +24,8 @@
                 android:id="@+id/totalTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
                 android:text="@string/str_total"
+                android:fontFamily="@font/opensans_semibold"
                 android:textSize="@dimen/normal_text"
                 android:textColor="@android:color/black" />
             <TextView

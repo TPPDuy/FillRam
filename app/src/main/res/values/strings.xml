@@ -23,4 +23,10 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Choosing values and units</string>
+    <string name="value">Value:</string>
+    <string name="units">Units:</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="subTitle">Select the value and the unit that you want to add</string>
 </resources>

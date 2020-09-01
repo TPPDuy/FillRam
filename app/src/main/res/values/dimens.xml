@@ -10,4 +10,8 @@
     <dimen name="extra_large_space">45dp</dimen>
     <dimen name="huge_space">280dp</dimen>
     <dimen name="normal_radius">5dp</dimen>
+
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_large">15dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
 </resources>

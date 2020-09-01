@@ -6,10 +6,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.fillrammemory.Classes.Memory
 import com.example.fillrammemory.R
 import com.example.fillrammemory.Services.MemoryService
@@ -18,7 +20,7 @@ import com.example.fillrammemory.Utils.MemoryUtils
 import kotlinx.android.synthetic.main.fragment_system_info.*
 
 
-class SystemInfoFragment : Fragment(), View.OnClickListener {
+class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.DialogListener {
     private lateinit var systemBroadcast: SystemInfoBroadcast
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,7 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
         btn400.setOnClickListener(this)
         btn500.setOnClickListener(this)
         btn700.setOnClickListener(this)
+        btnCustom.setOnClickListener(this)
     }
     override fun onResume() {
         super.onResume()
@@ -73,6 +76,9 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
                 handleIncreaseMem(1, "GB")
                 return
             }
+            R.id.btnCustom -> {
+                showCustomSizeDialog()
+            }
         }
     }
     private fun handleIncreaseMem(value: Int, unit: String) {
@@ -82,6 +88,13 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
         intent.putExtra(Constants.MSG_UNIT, unit)
         MemoryService.enqueueWork(requireContext(), intent)
     }
+
+    private fun showCustomSizeDialog() {
+        val customSizeDialog = CustomSizeDialog.newInstance();
+        customSizeDialog.setTargetFragment(this, CustomSizeDialog.TARGET)
+        customSizeDialog.show(requireFragmentManager(), CustomSizeDialog.TAG)
+    }
+
     inner class SystemInfoBroadcast : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent != null && intent.action != null) {
@@ -97,5 +110,17 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onFinishDialog(value: Int, unit: String) {
+
+        val info = "You just added ${value} ${unit}"
+//        val toast: Toast = Toast(requireContext())
+//        toast.setGravity(Gravity.BOTTOM, 0, 0)
+//        toast.duration = Toast.LENGTH_LONG
+//        toast.setText(info)
+//        toast.show()
+       Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
+        handleIncreaseMem(value, unit)
     }
 }
