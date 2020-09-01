@@ -7,7 +7,7 @@
 #include <android/log.h>
 
 extern "C" {
-    JNIEXPORT jobject JNICALL Java_com_example_fillrammemory_Services_MemoryService_varGenerator(JNIEnv *env, jobject instance, jlong size){
+    JNIEXPORT jobject JNICALL Java_com_example_fillrammemory_services_MemoryService_varGenerator(JNIEnv *env, jobject instance, jlong size){
         auto* buffer = (char*) malloc(size);
         if (buffer != nullptr) {
             memset(buffer, 1 , size);
@@ -16,9 +16,9 @@ extern "C" {
         return directBuffer;
     }
 
-    JNIEXPORT void JNICALL Java_com_example_fillrammemory_Services_MemoryService_freeVar(JNIEnv *env, jobject instance, jobject directBuff){
+    JNIEXPORT void JNICALL Java_com_example_fillrammemory_services_MemoryService_freeVar(JNIEnv *env, jobject instance, jobject directBuff){
         char* buffer;
-        buffer = (char*) (env)->GetDirectBufferAddress(directBuff);
+        buffer = (char*)(env)->GetDirectBufferAddress(directBuff);
         free(buffer);
     }
 }

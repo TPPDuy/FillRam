@@ -6,13 +6,13 @@
     app:startDestination="@id/systemInfoFragment">
     <fragment
         android:id="@+id/systemInfoFragment"
-        android:name="com.example.fillrammemory.Controllers.SystemInfoFragment"
+        android:name="com.example.fillrammemory.controllers.SystemInfoFragment"
         android:label="@string/tab_system"
         tools:layout="@layout/fragment_system_info">
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="com.example.fillrammemory.Controllers.AppInfoFragment"
+        android:name="com.example.fillrammemory.controllers.AppInfoFragment"
         android:label="@string/tab_app"
         tools:layout="@layout/fragment_app_info">
     </fragment>

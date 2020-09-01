@@ -1,12 +1,11 @@
-package com.example.fillrammemory.Utils
+package com.example.fillrammemory.utils
 
 import android.app.ActivityManager
 import android.content.Context
 import android.util.Log
-import com.example.fillrammemory.Services.MemoryService
+import com.example.fillrammemory.services.MemoryService
 import java.io.IOException
 import java.io.RandomAccessFile
-import java.lang.Exception
 import java.text.DecimalFormat
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
@@ -93,7 +92,7 @@ class MemoryUtils(context: Context) {
         }
 
         fun formatToString(value: Long): String {
-            val twoDecimalFormat: DecimalFormat = DecimalFormat("#.##")
+            val twoDecimalFormat = DecimalFormat("#.##")
             val mbValue = value.div(1024).div(MBToKB)
             val gbValue = value.div(1024).div(GBToKB)
             val result : String
