@@ -1,16 +1,13 @@
-package com.example.fillrammemory.Controllers
+package com.example.fillrammemory.controllers
 import android.os.*
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.fillrammemory.R
-import com.example.fillrammemory.Classes.Memory
-import com.example.fillrammemory.Utils.GetMemoryThread
+import com.example.fillrammemory.utils.GetMemoryThread
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(){
 

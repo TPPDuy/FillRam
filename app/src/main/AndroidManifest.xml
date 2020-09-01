@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
         android:largeHeap="true">
-        <activity android:name=".Controllers.MainActivity">
+        <activity android:name=".controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
         </activity>
 
         <service
-            android:name=".Services.MemoryService"
+            android:name=".services.MemoryService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>

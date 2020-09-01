@@ -1,17 +1,15 @@
-package com.example.fillrammemory.Services
+package com.example.fillrammemory.services
 
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.core.app.JobIntentService
-import com.example.fillrammemory.R
-import com.example.fillrammemory.Utils.Constants
-import com.example.fillrammemory.Utils.MemoryUtils
+import com.example.fillrammemory.utils.Constants
+import com.example.fillrammemory.utils.MemoryUtils
 import java.nio.ByteBuffer
 
 class MemoryService : JobIntentService() {
+
      override fun onCreate() {
          super.onCreate()
          Log.d(TAG, "Service Execution Started... ")
@@ -28,15 +26,23 @@ class MemoryService : JobIntentService() {
                 val arr = varGenerator(bytesValue)
                 if (arr != null) {
                     mAllocations.add(arr)
+                    mAllocationSize += arr.capacity()
+                    Log.d("ARR SIZE", arr.capacity().toString())
+                    Log.d("SIZE", mAllocationSize.toString())
+                    val broadcastIntent = Intent()
+                    broadcastIntent.action = Constants.CREATED_VAR
+                    broadcastIntent.putExtra(Constants.DATA, mAllocationSize)
+                    sendBroadcast(broadcastIntent)
                 }
-                val dataSize = arr?.remaining()?.div((1024*1024))
-                Log.d(TAG, "Running Service, increase  $dataSize size of Ram ")
-                Log.d(TAG, "Allocation ${mAllocations.size} bytes array")
             } else if (workType == Constants.FREE_MEM_JOB){
                 for (buff in mAllocations){
                     freeVar(buff)
+                    mAllocationSize = 0
+                    val broadcastIntent = Intent()
+                    broadcastIntent.action = Constants.CREATED_VAR
+                    broadcastIntent.putExtra(Constants.DATA, mAllocationSize)
+                    sendBroadcast(broadcastIntent)
                 }
-                Toast.makeText(applicationContext, getString(R.string.str_free_vars_success), LENGTH_SHORT).show()
             }
         }
     }
@@ -50,6 +56,7 @@ class MemoryService : JobIntentService() {
         private const val JOB_ID = 2
         var TAG = MemoryService::class.simpleName ?: "MEMORY SERVICE"
         private var mAllocations: ArrayList<ByteBuffer> = ArrayList()
+        private var mAllocationSize: Long = 0
         init {
             try{
                 System.loadLibrary("nativeLib")
