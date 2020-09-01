@@ -32,7 +32,10 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
         super.onStart()
         btn1.setOnClickListener(this)
         btn100.setOnClickListener(this)
+        btn200.setOnClickListener(this)
+        btn400.setOnClickListener(this)
         btn500.setOnClickListener(this)
+        btn700.setOnClickListener(this)
     }
     override fun onResume() {
         super.onResume()
@@ -74,6 +77,7 @@ class SystemInfoFragment : Fragment(), View.OnClickListener {
     }
     private fun handleIncreaseMem(value: Int, unit: String) {
         val intent = Intent(requireContext(), MemoryService::class.java)
+        intent.putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
         intent.putExtra(Constants.MSG_VALUE, value)
         intent.putExtra(Constants.MSG_UNIT, unit)
         MemoryService.enqueueWork(requireContext(), intent)

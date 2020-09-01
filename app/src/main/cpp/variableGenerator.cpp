@@ -15,4 +15,10 @@ extern "C" {
         jobject directBuffer = (env)->NewDirectByteBuffer(buffer, size);
         return directBuffer;
     }
+
+    JNIEXPORT void JNICALL Java_com_example_fillrammemory_Services_MemoryService_freeVar(JNIEnv *env, jobject instance, jobject directBuff){
+        char* buffer;
+        buffer = (char*) (env)->GetDirectBufferAddress(directBuff);
+        free(buffer);
+    }
 }

@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity(){
         super.onStop()
         getMemoryThread.quitSafely()
     }
+
+
     /*
     override fun run() {
         memoryUtils.updateMemInfo()
@@ -132,7 +134,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     }
 <<<<<<< HEAD
 */
-    class UiHandler : Handler() {
+   /* class UiHandler : Handler() {
         private lateinit var mActivityRef: WeakReference<MainActivity>
 
         fun setActivityRef(mainActivity: MainActivity) {
@@ -148,13 +150,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
             Log.d("THREAD ",  msg.toString())
             val memoryInfo: Memory = msg.obj as Memory;
-            /*activity.totalValue.text = Formatter.formatFileSize(activity, memoryInfo.total)
+            *//*activity.totalValue.text = Formatter.formatFileSize(activity, memoryInfo.total)
             activity.freeValue.text = Formatter.formatFileSize(activity, memoryInfo.available)
             activity.usedValue.text = Formatter.formatFileSize(activity, (memoryInfo.total.minus(memoryInfo.available)))
             activity.progressBar.progress = memoryInfo.availablePercent
-            activity.progressPercentage.text = "${ memoryInfo.availablePercent}%"*/
+            activity.progressPercentage.text = "${ memoryInfo.availablePercent}%"*//*
         }
 
-    }
+    }*/
 }
 

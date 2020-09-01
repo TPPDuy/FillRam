@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FillRamMemory</string>
+    <string name="app_name">Fill Ram Memory</string>
     <string name="tab_system">System Info</string>
     <string name="tab_app">App Info</string>
     <string name="str_system">System</string>

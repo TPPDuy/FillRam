@@ -5,15 +5,6 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
-<!--    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/normal_space"
-        android:background="@color/colorPrimary"
-        android:fontFamily="@font/opensans_semibold"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/normal_text"
-        android:text="@string/tab_system"/>-->
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_space"/>

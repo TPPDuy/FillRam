@@ -6,6 +6,9 @@ class Constants {
         const val MSG_UPDATE_USED_MEM = 2
         const val MSG_UPDATE_FREE_MEM = 3
 
+        const val WORK_TYPE = "work type"
+        const val FREE_MEM_JOB = "free allocated vars"
+        const val GEN_VAR_JOB = "generate vars"
         const val MSG_VALUE = "value"
         const val MSG_UNIT = "unit"
 
