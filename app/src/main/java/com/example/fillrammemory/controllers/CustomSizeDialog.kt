@@ -1,5 +1,6 @@
 package com.example.fillrammemory.Controllers
 import android.os.Bundle
+import android.text.method.DigitsKeyListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
         btnCancel = view.findViewById(R.id.btnCancel)
         btnOK = view.findViewById(R.id.btnOk)
         spinner = view.findViewById(R.id.sipnnerUnits)
+        edtValue.keyListener = DigitsKeyListener.getInstance("1234567890")
 
         val adapter = ArrayAdapter<String>(requireContext(),
             android.R.layout.simple_spinner_item, listOfUnits)
@@ -93,7 +95,6 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 
     companion object {

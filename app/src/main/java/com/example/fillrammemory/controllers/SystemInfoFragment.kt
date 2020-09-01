@@ -103,11 +103,15 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
     }
 
     private fun handleIncreaseMem(value: Int, unit: String) {
-        val intent = Intent(requireContext(), MemoryService::class.java)
-        intent.putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
-        intent.putExtra(Constants.MSG_VALUE, value)
-        intent.putExtra(Constants.MSG_UNIT, unit)
-        MemoryService.enqueueWork(requireContext(), intent)
+        if(MemoryUtils.getInstance(requireContext()).isAvailableAdded(value, unit)) {
+            val intent = Intent(requireContext(), MemoryService::class.java)
+            intent.putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
+            intent.putExtra(Constants.MSG_VALUE, value)
+            intent.putExtra(Constants.MSG_UNIT, unit)
+            MemoryService.enqueueWork(requireContext(), intent)
+        } else {
+            Toast.makeText(requireContext(), "The value you need to add is more than the current memory value!", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun showCustomSizeDialog() {
@@ -116,22 +120,22 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
         customSizeDialog.show(requireFragmentManager(), CustomSizeDialog.TAG)
     }
 
-    inner class SystemInfoBroadcast : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if(intent != null && intent.action != null) {
-                val action = intent.action
-                if (action.equals(Constants.SYSTEM_INFO)){
-                    Log.d("RECEIVE BROADCAST", intent.toString())
-                    val memoryInfo = intent.extras?.getBundle(Constants.DATA)?.get(Constants.BUNDLE) as Memory
-                    totalValue.text = MemoryUtils.formatToString(memoryInfo.total)
-                    availableValue.text = MemoryUtils.formatToString(memoryInfo.available)
-                    usedValue.text = MemoryUtils.formatToString(memoryInfo.total.minus(memoryInfo.available))
-                    progressBar.progress = memoryInfo.availablePercent
-                    progressPercentage.text = "${memoryInfo.availablePercent}%"
-                }
-            }
-        }
-    }
+//    inner class SystemInfoBroadcast : BroadcastReceiver() {
+//        override fun onReceive(context: Context?, intent: Intent?) {
+//            if(intent != null && intent.action != null) {
+//                val action = intent.action
+//                if (action.equals(Constants.SYSTEM_INFO)){
+//                    Log.d("RECEIVE BROADCAST", intent.toString())
+//                    val memoryInfo = intent.extras?.getBundle(Constants.DATA)?.get(Constants.BUNDLE) as Memory
+//                    totalValue.text = MemoryUtils.formatToString(memoryInfo.total)
+//                    availableValue.text = MemoryUtils.formatToString(memoryInfo.available)
+//                    usedValue.text = MemoryUtils.formatToString(memoryInfo.total.minus(memoryInfo.available))
+//                    progressBar.progress = memoryInfo.availablePercent
+//                    progressPercentage.text = "${memoryInfo.availablePercent}%"
+//                }
+//            }
+//        }
+//    }
 
     override fun onFinishDialog(value: Int, unit: String) {
 

@@ -22,7 +22,6 @@ class MemoryService : JobIntentService() {
                 val value = intent.getIntExtra(Constants.MSG_VALUE, 0)
                 val unit = intent.getStringExtra(Constants.MSG_UNIT)
                 val bytesValue =  MemoryUtils.getInstance(this).convertValueToBytes(value, unit ?: "MB");
-
                 val arr = varGenerator(bytesValue)
                 if (arr != null) {
                     mAllocations.add(arr)

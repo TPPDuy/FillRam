@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/normal_text"
+            android:textSize="@dimen/medium_text"
             android:textColor="@android:color/white"/>
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_weight="0.4"
             android:text="@string/value"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/normal_text"
             android:textColor="@android:color/black"
             android:layout_gravity="bottom"/>
         <EditText
@@ -62,7 +62,7 @@
             android:layout_weight="0.4"
             android:text="@string/units"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/normal_text"
             android:textColor="@android:color/black"
             android:layout_gravity="bottom"/>
        <Spinner

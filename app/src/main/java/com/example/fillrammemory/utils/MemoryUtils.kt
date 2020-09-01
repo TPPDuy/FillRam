@@ -54,10 +54,16 @@ class MemoryUtils(context: Context) {
         return (mbValue * GBToB).toLong();
     }
 
+    private fun convertKBToBytes(kbValue: Int): Long {
+        return (kbValue * KBToB).toLong();
+    }
+
     fun convertValueToBytes(value: Int, unit: String) : Long {
         var convertValue: Long = 0
         when (unit) {
-            "KB" -> {}
+            "KB" -> {
+                convertValue = convertKBToBytes(value)
+            }
             "MB" -> {
                 convertValue = convertMBToBytes(value)
             }
@@ -77,11 +83,37 @@ class MemoryUtils(context: Context) {
         Log.d(MemoryService.TAG , info)
     }
 
+    fun isAvailableAdded(value: Int, unit: String) : Boolean {
+        var convertValue: Double = 0.00
+        when(unit){
+            "KB" -> {
+                convertValue = value.div(1024).div(GBToKB)
+            }
+            "MB" -> {
+                convertValue = value.div(1024).toDouble()
+            }
+            "GB" -> {
+                convertValue = value.toDouble()
+            }
+        }
+        updateMemInfo()
+       Log.d("TAG", convertValue.toString())
+
+        val avaiMem = memoryInfo.availMem.div(1024*1024).div(MBToKB).toDouble()
+    Log.d("TAG",avaiMem.toString())
+
+        if(convertValue <= avaiMem) {
+            return true
+        }
+        return false
+    }
+
     companion object{
         private const val MBToKB = 1024.0
         private const val GBToKB = 1024.0 * 1024.0
         private const val MBToB = 1024 * 1024
         private const val GBToB = 1024 * 1024 * 1024
+        private const val KBToB = 1024
 
         private var instance: MemoryUtils? = null
         fun getInstance(context: Context): MemoryUtils{
@@ -135,5 +167,6 @@ class MemoryUtils(context: Context) {
                 return 0.0
             }
         }
+
     }
 }
