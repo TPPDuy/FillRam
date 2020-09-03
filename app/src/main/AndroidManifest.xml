@@ -23,11 +23,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".services.MemoryService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service android:name=".Services.MemoryForegroundService"
             android:enabled="true"
             android:exported="true" />

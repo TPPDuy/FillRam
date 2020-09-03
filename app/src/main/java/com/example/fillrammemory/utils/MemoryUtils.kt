@@ -3,12 +3,11 @@ package com.example.fillrammemory.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.util.Log
-import com.example.fillrammemory.services.MemoryService
+import com.example.fillrammemory.Services.MemoryForegroundService
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.text.DecimalFormat
 import java.util.regex.Pattern
-import kotlin.collections.ArrayList
 
 class MemoryUtils(context: Context) {
 
@@ -80,7 +79,7 @@ class MemoryUtils(context: Context) {
                 "  Runtime Max Memory =  ${formatToString(runtime.maxMemory())}\n" +
                 "  Runtime Total Memory = ${formatToString(runtime.totalMemory())}\n" +
                 "  Runtime Free Memory = ${formatToString(runtime.freeMemory())}"
-        Log.d(MemoryService.TAG , info)
+        Log.d(MemoryForegroundService.TAG , info)
     }
 
     fun isAvailableAdded(value: Int, unit: String) : Boolean {
