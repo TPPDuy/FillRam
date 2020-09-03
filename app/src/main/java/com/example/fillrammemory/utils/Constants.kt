@@ -14,5 +14,7 @@ class Constants {
         const val CREATED_VAR = "Created var"
         const val BUNDLE = "Bundle"
         const val DATA = "Data"
+
+        const val TESTING_FORE = "Testing foreground service"
     }
 }

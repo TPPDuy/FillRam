@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.fillrammemory.classes.Memory
 import com.example.fillrammemory.R
-import com.example.fillrammemory.services.MemoryService
+import com.example.fillrammemory.Services.MemoryForegroundService
 import com.example.fillrammemory.utils.Constants
 import com.example.fillrammemory.utils.MemoryUtils
 import com.example.fillrammemory.viewModels.MemoryInfoViewModel
@@ -51,9 +51,9 @@ class AppInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         if (view?.id == R.id.btnFree) {
-            val intent = Intent()
+            val intent = Intent(requireContext(), MemoryForegroundService::class.java)
             intent.putExtra(Constants.WORK_TYPE, Constants.FREE_MEM_JOB)
-            MemoryService.enqueueWork(requireContext(), intent)
+            MemoryForegroundService.startServiceExecute(requireContext(), intent)
         }
     }
 }

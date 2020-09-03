@@ -1,11 +1,7 @@
 package com.example.fillrammemory.controllers
-
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +13,7 @@ import com.example.fillrammemory.Controllers.CustomSizeDialog
 import com.example.fillrammemory.broadcast.MemoryInfoBroadcast
 import com.example.fillrammemory.classes.Memory
 import com.example.fillrammemory.R
-import com.example.fillrammemory.services.MemoryService
+import com.example.fillrammemory.Services.MemoryForegroundService
 import com.example.fillrammemory.utils.Constants
 import com.example.fillrammemory.utils.MemoryUtils
 import com.example.fillrammemory.viewModels.MemoryInfoViewModel
@@ -104,11 +100,11 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
 
     private fun handleIncreaseMem(value: Int, unit: String) {
         if(MemoryUtils.getInstance(requireContext()).isAvailableAdded(value, unit)) {
-            val intent = Intent(requireContext(), MemoryService::class.java)
+            val intent = Intent(requireContext(), MemoryForegroundService::class.java)
             intent.putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
             intent.putExtra(Constants.MSG_VALUE, value)
             intent.putExtra(Constants.MSG_UNIT, unit)
-            MemoryService.enqueueWork(requireContext(), intent)
+            MemoryForegroundService.startServiceExecute(requireContext(), intent)
         } else {
             Toast.makeText(requireContext(), "The value you need to add is more than the current memory value!", Toast.LENGTH_LONG).show()
         }
@@ -120,22 +116,6 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
         customSizeDialog.show(requireFragmentManager(), CustomSizeDialog.TAG)
     }
 
-//    inner class SystemInfoBroadcast : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            if(intent != null && intent.action != null) {
-//                val action = intent.action
-//                if (action.equals(Constants.SYSTEM_INFO)){
-//                    Log.d("RECEIVE BROADCAST", intent.toString())
-//                    val memoryInfo = intent.extras?.getBundle(Constants.DATA)?.get(Constants.BUNDLE) as Memory
-//                    totalValue.text = MemoryUtils.formatToString(memoryInfo.total)
-//                    availableValue.text = MemoryUtils.formatToString(memoryInfo.available)
-//                    usedValue.text = MemoryUtils.formatToString(memoryInfo.total.minus(memoryInfo.available))
-//                    progressBar.progress = memoryInfo.availablePercent
-//                    progressPercentage.text = "${memoryInfo.availablePercent}%"
-//                }
-//            }
-//        }
-//    }
 
     override fun onFinishDialog(value: Int, unit: String) {
 
@@ -148,4 +128,5 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
         Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
         handleIncreaseMem(value, unit)
     }
+
 }
