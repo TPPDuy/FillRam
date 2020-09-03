@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import com.example.fillrammemory.Controllers.CustomSizeDialog
 import com.example.fillrammemory.broadcast.MemoryInfoBroadcast
 import com.example.fillrammemory.classes.Memory
 import com.example.fillrammemory.R
@@ -113,7 +112,7 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
     private fun showCustomSizeDialog() {
         val customSizeDialog = CustomSizeDialog.newInstance();
         customSizeDialog.setTargetFragment(this, CustomSizeDialog.TARGET)
-        customSizeDialog.show(requireFragmentManager(), CustomSizeDialog.TAG)
+        fragmentManager?.let { customSizeDialog.show(it, CustomSizeDialog.TAG) }
     }
 
     inner class SystemInfoBroadcast : BroadcastReceiver() {
