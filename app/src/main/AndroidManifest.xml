@@ -3,6 +3,8 @@
     package="com.example.fillrammemory">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,10 +23,9 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".services.MemoryService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".services.MemoryService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

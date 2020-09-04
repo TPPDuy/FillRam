@@ -91,6 +91,33 @@
                 android:textSize="@dimen/normal_text"
                 android:textColor="@android:color/black" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/normal_space">
+            <TextView
+                android:id="@+id/createdTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/str_created"
+                android:textSize="@dimen/normal_text"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/createdValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/opensans_regular"
+                android:textSize="@dimen/normal_text"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
     </GridLayout>
 
     <Space

@@ -1,5 +1,6 @@
 package com.example.fillrammemory.controllers
 import android.os.Bundle
+import android.text.method.DigitsKeyListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.custom_size_dialog.*
 class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnItemSelectedListener{
 
     interface DialogListener {
-        fun onFinishDialog(value: Int, unit: String)
+        fun onFinishDialog(value: Long, unit: String)
     }
 
     private lateinit var listener: DialogListener
@@ -46,7 +47,8 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
     private fun setupView(view: View) {
         btnCancel = view.findViewById(R.id.btnCancel)
         btnOK = view.findViewById(R.id.btnOk)
-        spinner = view.findViewById(R.id.sipnnerUnits)
+        spinner = view.findViewById(R.id.spinnerUnits)
+        edtValue.keyListener = DigitsKeyListener.getInstance("1234567890")
 
         val adapter = ArrayAdapter<String>(requireContext(),
             android.R.layout.simple_spinner_item, listOfUnits)
@@ -77,10 +79,10 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
                     valueResult = edtValue?.text.toString().trim()
                     if(valueResult.isEmpty()) {
                         Toast.makeText(requireContext(),
-                            "Value is not empty!", Toast.LENGTH_LONG)
+                            "Value cannot be empty!", Toast.LENGTH_LONG)
                             .show();
                     } else {
-                        listener.onFinishDialog(valueResult.toInt(), unitResult)
+                        listener.onFinishDialog(valueResult.toLong(), unitResult)
                         dismiss()
                     }
                 }
@@ -93,7 +95,6 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 
     companion object {

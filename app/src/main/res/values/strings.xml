@@ -22,12 +22,14 @@
         <item>MB</item>
         <item>GB</item>
     </string-array>
+
+    <string name="str_noti_desc">Allocated %d memory</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title">Choosing values and units</string>
+    <string name="title">Custom value</string>
     <string name="value">Value:</string>
-    <string name="units">Units:</string>
+    <string name="units">Unit:</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="subTitle">Select the value and the unit that you want to add</string>
+    <string name="ok">Accept</string>
+    <string name="subTitle">Enter a value and then select corresponding unit</string>
 </resources>

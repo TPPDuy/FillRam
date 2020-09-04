@@ -7,27 +7,23 @@ import androidx.lifecycle.ViewModel
 import com.example.fillrammemory.classes.Memory
 
 class MemoryInfoViewModel: ViewModel() {
-    private var systemMemoryInfo = MutableLiveData<Memory>(Memory())
-    private var appMemoryInfo = MutableLiveData<Memory>(Memory())
+    private var memoryInfo = MutableLiveData<Memory>(Memory())
 
-    fun updateSystemMemInfo(newInfo: Memory){
-        systemMemoryInfo.value = newInfo
-    }
-    fun updateAppMemInfo(newInfo: Memory){
-        appMemoryInfo.value?.total = newInfo.total
-        appMemoryInfo.value?.available = newInfo.available
+    fun updateMemInfo(info: Memory){
+        val newInfo = memoryInfo.value?.created?.let {
+            Memory(info.total, info.available,
+                it, info.availablePercent)
+        }
+        memoryInfo.value = newInfo
     }
     fun updateCreatedMem(size: Long){
         Log.d("Update created mem: ", size.toString())
-        appMemoryInfo.value?.created = size
+        val newInfo = memoryInfo.value
+        newInfo?.created = size
+        memoryInfo.value = newInfo
     }
 
-    fun getSystemMemoryInfo(): LiveData<Memory>{
-        return systemMemoryInfo
+    fun getMemoryInfo(): LiveData<Memory>{
+        return memoryInfo
     }
-
-    fun getAppMemoryInfo(): LiveData<Memory>{
-        return appMemoryInfo
-    }
-
 }

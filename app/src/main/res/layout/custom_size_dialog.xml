@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/normal_text"
+            android:textSize="@dimen/medium_text"
             android:textColor="@android:color/white"/>
 
         <TextView
@@ -35,20 +35,21 @@
         android:orientation="horizontal"
         android:padding="@dimen/padding_medium">
         <TextView
-            android:layout_width="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="1"
             android:text="@string/value"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/normal_text"
             android:textColor="@android:color/black"
             android:layout_gravity="bottom"/>
         <EditText
             android:id="@+id/edtValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.4"
-            android:inputType="numberDecimal"/>
+            android:layout_weight="3"
+            android:inputType="numberDecimal"
+            android:layout_gravity="bottom"/>
     </LinearLayout>
 
     <LinearLayout
@@ -57,21 +58,20 @@
         android:orientation="horizontal"
         android:padding="@dimen/padding_medium">
         <TextView
-            android:layout_width="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="1"
             android:text="@string/units"
             android:fontFamily="@font/opensans_semibold"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/normal_text"
             android:textColor="@android:color/black"
             android:layout_gravity="bottom"/>
        <Spinner
-           android:id="@+id/sipnnerUnits"
+           android:id="@+id/spinnerUnits"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
-           android:layout_weight="1.4"
-           android:layout_marginTop="8dp"
-           android:paddingTop="@dimen/padding_large"/>
+           android:layout_weight="3"
+           android:layout_gravity="bottom" />
     </LinearLayout>
 
     <LinearLayout
@@ -91,6 +91,7 @@
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_space"
             android:text="@string/ok"
             android:fontFamily="@font/opensans_regular"/>
     </LinearLayout>

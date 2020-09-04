@@ -30,18 +30,6 @@ class AppInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getAppMemoryInfo().observe(viewLifecycleOwner, Observer<Memory>{ mem ->
-            run {
-                totalValue.text = MemoryUtils.formatToString(mem.total)
-                availableValue.text = MemoryUtils.formatToString(mem.available)
-                createdValue.text =
-                    MemoryUtils.formatToString(mem.created)
-                progressBar.progress = (mem.created.times(100).div(mem.total).toInt())
-                progressPercentage.text = "${mem.created.times(100).div(mem.total)}%"
-            }
-
-        })
     }
 
     override fun onStart() {
@@ -51,9 +39,9 @@ class AppInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         if (view?.id == R.id.btnFree) {
-            val intent = Intent()
+            val intent = Intent(requireContext(), MemoryService::class.java)
             intent.putExtra(Constants.WORK_TYPE, Constants.FREE_MEM_JOB)
-            MemoryService.enqueueWork(requireContext(), intent)
+            MemoryService.startServiceExecute(requireContext(), intent)
         }
     }
 }

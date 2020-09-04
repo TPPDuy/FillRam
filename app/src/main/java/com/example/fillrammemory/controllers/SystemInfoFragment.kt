@@ -1,10 +1,7 @@
 package com.example.fillrammemory.controllers
-
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,10 +19,10 @@ import com.example.fillrammemory.utils.MemoryUtils
 import com.example.fillrammemory.viewModels.MemoryInfoViewModel
 import kotlinx.android.synthetic.main.fragment_system_info.*
 
-class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.DialogListener {
+class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.DialogListener, ServiceConnection {
     private lateinit var systemBroadcast: MemoryInfoBroadcast
     private val viewModel: MemoryInfoViewModel by activityViewModels()
-
+    private var memoryService: MemoryService? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,16 +38,21 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
         intentFilter.addAction(Constants.CREATED_VAR)
         activity?.registerReceiver(systemBroadcast, intentFilter)
 
-        viewModel.getSystemMemoryInfo().observe(viewLifecycleOwner, Observer<Memory>{ mem ->
+        val intent = Intent(requireContext(), MemoryService::class.java)
+        MemoryService.startServiceExecute(requireContext(), intent) //keep service run independently
+        activity?.bindService(intent, this, Context.BIND_IMPORTANT)
+
+        viewModel.getMemoryInfo().observe(viewLifecycleOwner, Observer<Memory>{ mem ->
             run {
                 totalValue.text = MemoryUtils.formatToString(mem.total)
                 availableValue.text = MemoryUtils.formatToString(mem.available)
                 usedValue.text =
                     MemoryUtils.formatToString(mem.total.minus(mem.available))
+                createdValue.text =
+                    MemoryUtils.formatToString(mem.created)
                 progressBar.progress = mem.availablePercent
                 progressPercentage.text = "${mem.availablePercent}%"
             }
-
         })
     }
     override fun onStart() {
@@ -66,8 +68,8 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
 
     override fun onDestroy() {
         super.onDestroy()
-        activity?.unregisterReceiver(systemBroadcast)
-
+        requireContext().unregisterReceiver(systemBroadcast)
+        requireContext().unbindService(this)
     }
     override fun onClick(view: View?) {
         when(view?.id){
@@ -96,51 +98,44 @@ class SystemInfoFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Di
                 return
             }
             R.id.btnCustom -> {
-                showCustomSizeDialog()
+                showDialog()
             }
         }
     }
 
-    private fun handleIncreaseMem(value: Int, unit: String) {
-        val intent = Intent(requireContext(), MemoryService::class.java)
-        intent.putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
-        intent.putExtra(Constants.MSG_VALUE, value)
-        intent.putExtra(Constants.MSG_UNIT, unit)
-        MemoryService.enqueueWork(requireContext(), intent)
-    }
+    private fun handleIncreaseMem(value: Long, unit: String) =
+        if(MemoryUtils.getInstance(requireContext()).isAvailableAdded(value, unit)) {
+            /*val intent = Intent(requireContext(), MemoryService::class.java).apply {
+                putExtra(Constants.WORK_TYPE, Constants.GEN_VAR_JOB)
+                putExtra(Constants.MSG_VALUE, value)
+                putExtra(Constants.MSG_UNIT, unit)
+            }
+            MemoryService.startServiceExecute(requireContext(), intent)*/
+            Log.d("INCREASE", if(memoryService == null) "null" else memoryService.toString())
+            memoryService?.allocateVariable(value, unit)
+        } else {
+            Toast.makeText(requireContext(), "The value you need to add is more than the current memory value!", Toast.LENGTH_LONG).show()
+        }
 
-    private fun showCustomSizeDialog() {
+    private fun showDialog() {
         val customSizeDialog = CustomSizeDialog.newInstance();
         customSizeDialog.setTargetFragment(this, CustomSizeDialog.TARGET)
         fragmentManager?.let { customSizeDialog.show(it, CustomSizeDialog.TAG) }
     }
 
-    inner class SystemInfoBroadcast : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if(intent != null && intent.action != null) {
-                val action = intent.action
-                if (action.equals(Constants.SYSTEM_INFO)){
-                    Log.d("RECEIVE BROADCAST", intent.toString())
-                    val memoryInfo = intent.extras?.getBundle(Constants.DATA)?.get(Constants.BUNDLE) as Memory
-                    totalValue.text = MemoryUtils.formatToString(memoryInfo.total)
-                    availableValue.text = MemoryUtils.formatToString(memoryInfo.available)
-                    usedValue.text = MemoryUtils.formatToString(memoryInfo.total.minus(memoryInfo.available))
-                    progressBar.progress = memoryInfo.availablePercent
-                    progressPercentage.text = "${memoryInfo.availablePercent}%"
-                }
-            }
-        }
+
+    override fun onFinishDialog(value: Long, unit: String) {
+        val info = "You just added ${value} ${unit}"
+        Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
+        handleIncreaseMem(value, unit)
     }
 
-    override fun onFinishDialog(value: Int, unit: String) {
+    override fun onServiceConnected(componentName: ComponentName?, binder: IBinder?) {
+        Log.d("CONNECTION", "Service connected")
+        val serviceBinder = binder as MemoryService.ServiceBinder
+        memoryService = serviceBinder.serviceInstance
+    }
 
-        val info = "You just added ${value} ${unit}"
-//        val toast: Toast = Toast(requireContext())
-//        toast.setGravity(Gravity.BOTTOM, 0, 0)
-//        toast.duration = Toast.LENGTH_LONG
-//        toast.setText(info)
-//        toast.show()
-       Toast.makeText(requireContext(), info, Toast.LENGTH_LONG).show()
-        handleIncreaseMem(value, unit)
+    override fun onServiceDisconnected(componentName: ComponentName?) {
     }
 }
