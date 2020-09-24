@@ -6,14 +6,14 @@
     app:startDestination="@id/systemInfoFragment">
     <fragment
         android:id="@+id/systemInfoFragment"
-        android:name="com.example.fillrammemory.controllers.SystemInfoFragment"
-        android:label="@string/tab_system"
-        tools:layout="@layout/fragment_system_info">
+        android:name="com.example.fillrammemory.controllers.GenVarFragment"
+        android:label="@string/tab_dump"
+        tools:layout="@layout/fragment_gen_var">
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="com.example.fillrammemory.controllers.AppInfoFragment"
-        android:label="@string/tab_app"
-        tools:layout="@layout/fragment_app_info">
+        android:name="com.example.fillrammemory.controllers.MemoryInfoFragment"
+        android:label="@string/tab_speed_up"
+        tools:layout="@layout/fragment_memory_info">
     </fragment>
 </navigation>

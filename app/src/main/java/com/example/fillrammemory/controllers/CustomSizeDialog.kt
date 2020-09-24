@@ -1,4 +1,5 @@
 package com.example.fillrammemory.controllers
+import android.app.Dialog
 import android.os.Bundle
 import android.text.method.DigitsKeyListener
 import android.view.LayoutInflater
@@ -60,12 +61,14 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
 
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         dialog?.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+        dialog?.setCanceledOnTouchOutside(false)
+        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
     }
 
 
@@ -107,8 +110,7 @@ class CustomSizeDialog : DialogFragment(), View.OnClickListener, AdapterView.OnI
 
 
         fun newInstance() : CustomSizeDialog{
-            val fragment = CustomSizeDialog()
-            return fragment;
+            return CustomSizeDialog();
         }
     }
 

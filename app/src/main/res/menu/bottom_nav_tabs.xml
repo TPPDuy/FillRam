@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/systemInfoFragment"
-        android:icon="@drawable/ic_tab_system"
-        android:title="@string/str_system"
-        android:orderInCategory="1"
-        app:showAsAction="always"/>
+        android:icon="@drawable/ic_objects"
+        android:title="@string/str_fill_mem"
+        android:orderInCategory="1" />
     <item
         android:id="@+id/appInfoFragment"
-        android:icon="@drawable/ic_tab_app"
-        android:title="@string/str_app"
-        android:orderInCategory="2"
-        app:showAsAction="always"/>
+        android:icon="@drawable/ic_ram_usage"
+        android:title="@string/str_ram_usage"
+        android:orderInCategory="2" />
 </menu>

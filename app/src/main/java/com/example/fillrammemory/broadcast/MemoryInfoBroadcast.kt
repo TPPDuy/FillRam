@@ -11,18 +11,14 @@ import com.example.fillrammemory.viewModels.MemoryInfoViewModel
 class MemoryInfoBroadcast(var viewModel: MemoryInfoViewModel? = null): BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if(intent != null && intent.action != null) {
-            val action = intent.action
-            if (action.equals(Constants.SYSTEM_INFO)){
+            if (intent.action == Constants.SYSTEM_INFO){
                 val memoryInfo = intent.extras?.getBundle(Constants.DATA)?.get(Constants.BUNDLE) as Memory?
                 if (memoryInfo != null) {
                     viewModel?.updateMemInfo(memoryInfo)
                 }
-            } else if (action.equals(Constants.CREATED_VAR)){
-                val buffSize = intent.extras?.getLong(Constants.DATA)
-                if (buffSize != null) {
-                    viewModel?.updateCreatedMem(buffSize)
-                    Log.d("BROADCAST", "update created $buffSize")
-                }
+            }
+            if (intent.action == Constants.UPDATE_STATE){
+                viewModel?.updateState(intent.extras?.getBoolean(Constants.DATA) ?: false)
             }
         }
     }

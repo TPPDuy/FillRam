@@ -1,12 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:padding="@dimen/padding_medium">
         <TextView
@@ -15,7 +14,7 @@
             android:text="@string/title"
             android:fontFamily="@font/opensans_semibold"
             android:textSize="@dimen/medium_text"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/colorPrimary"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -24,9 +23,8 @@
             android:fontFamily="@font/opensans_regular"
             android:textSize="@dimen/small_text"
             android:layout_marginTop="@dimen/margin_small"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorGray"
             />
-
     </LinearLayout>
 
     <LinearLayout
@@ -48,8 +46,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
             android:inputType="numberDecimal"
-            android:layout_gravity="bottom"/>
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorGrayText">
+            <requestFocus />
+        </EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -86,13 +91,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:fontFamily="@font/opensans_regular"/>
+            android:fontFamily="@font/opensans_semibold"
+            android:background="@android:color/transparent"/>
         <Button
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/normal_space"
             android:text="@string/ok"
-            android:fontFamily="@font/opensans_regular"/>
+            android:fontFamily="@font/opensans_semibold"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 </LinearLayout>

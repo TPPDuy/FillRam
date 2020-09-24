@@ -1,6 +1,5 @@
 package com.example.fillrammemory.viewModels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,22 +7,21 @@ import com.example.fillrammemory.classes.Memory
 
 class MemoryInfoViewModel: ViewModel() {
     private var memoryInfo = MutableLiveData<Memory>(Memory())
+    private var isUpdateMemory = MutableLiveData<Boolean>(false)
 
     fun updateMemInfo(info: Memory){
-        val newInfo = memoryInfo.value?.created?.let {
-            Memory(info.total, info.available,
-                it, info.availablePercent)
-        }
-        memoryInfo.value = newInfo
-    }
-    fun updateCreatedMem(size: Long){
-        Log.d("Update created mem: ", size.toString())
-        val newInfo = memoryInfo.value
-        newInfo?.created = size
-        memoryInfo.value = newInfo
+        memoryInfo.value = info
     }
 
     fun getMemoryInfo(): LiveData<Memory>{
         return memoryInfo
+    }
+
+    fun updateState(state: Boolean){
+        isUpdateMemory.value = state
+    }
+
+    fun getUpdateMemoryState(): LiveData<Boolean>{
+        return isUpdateMemory
     }
 }

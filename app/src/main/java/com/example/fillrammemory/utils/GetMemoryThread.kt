@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.*
 import android.util.Log
 import com.example.fillrammemory.classes.Memory
+import com.example.fillrammemory.services.MemoryService
 
 class GetMemoryThread(threadName: String, val context: Context) : HandlerThread(threadName){
 
@@ -21,7 +22,7 @@ class GetMemoryThread(threadName: String, val context: Context) : HandlerThread(
         private lateinit var memoryInfo: Memory
         override fun run() {
             memoryUtils.updateMemInfo()
-            memoryInfo = Memory(total = memoryUtils.getTotalRam(),available =  memoryUtils.getAvailableRam(), availablePercent = memoryUtils.getAvailableMemInPercentage())
+            memoryInfo = Memory(total = memoryUtils.getTotalRam(),available = memoryUtils.getAvailableRam(), availablePercent = memoryUtils.getAvailableMemInPercentage(), created = MemoryService.mAllocationSize)
             val intent = Intent()
             val bundle = Bundle()
             bundle.putSerializable(Constants.BUNDLE, memoryInfo)
@@ -29,7 +30,7 @@ class GetMemoryThread(threadName: String, val context: Context) : HandlerThread(
             intent.putExtra(Constants.DATA, bundle)
             context.sendBroadcast(intent)
             Log.d("SEND BROADCAST", intent.toString())
-            mHandler.postDelayed(this, 500)
+            mHandler.postDelayed(this, 300)
         }
     }
 }

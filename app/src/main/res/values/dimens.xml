@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="small_text">14sp</dimen>
+    <dimen name="extra_small_text">12sp</dimen>
     <dimen name="normal_text">18sp</dimen>
     <dimen name="medium_text">24sp</dimen>
+    <dimen name="large_text">35sp</dimen>
+    <dimen name="extra_large_text">65sp</dimen>
+    <dimen name="extra_small_space">5dp</dimen>
     <dimen name="small_space">8dp</dimen>
     <dimen name="normal_space">16dp</dimen>
     <dimen name="medium_space">24dp</dimen>
     <dimen name="large_space">32dp</dimen>
     <dimen name="extra_large_space">45dp</dimen>
+    <dimen name="img_size_normal">60dp</dimen>
+    <dimen name="img_size_medium">75dp</dimen>
+    <dimen name="img_size_extra_medium">100dp</dimen>
     <dimen name="huge_space">280dp</dimen>
     <dimen name="normal_radius">5dp</dimen>
 
     <dimen name="padding_medium">10dp</dimen>
     <dimen name="padding_large">15dp</dimen>
     <dimen name="margin_small">5dp</dimen>
+
+    <dimen name="loading_size">40dp</dimen>
 </resources>

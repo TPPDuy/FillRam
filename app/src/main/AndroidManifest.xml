@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fillrammemory">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,9 +27,17 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.MemoryService"
+        <service
+            android:name=".services.MemoryService"
             android:enabled="true"
             android:exported="false" />
+        <receiver
+            android:name=".broadcast.NotificationBroadcast"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="notification button clicked"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

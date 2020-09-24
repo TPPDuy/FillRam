@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners
+                android:radius="@dimen/huge_space"/>
+            <solid
+                android:color="@color/colorPrimary"/>
+            <size
+                android:width="@dimen/medium_space"
+                android:height="@dimen/medium_space"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_check"
+        android:top="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:bottom="5dp"/>
+</layer-list>

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Fill Ram Memory</string>
-    <string name="tab_system">System Info</string>
-    <string name="tab_app">App Info</string>
-    <string name="str_system">System</string>
-    <string name="str_app">Application</string>
-    <string name="str_total">Total:</string>
-    <string name="str_available">Available:</string>
-    <string name="str_used">Used:</string>
-    <string name="str_created">Created:</string>
+    <string name="tab_dump">Dump memory</string>
+    <string name="tab_speed_up">Speed up</string>
+    <string name="str_fill_mem">Fill Ram</string>
+    <string name="str_ram_usage">Ram usage</string>
+    <string name="str_total">Total</string>
+    <string name="str_available">Available</string>
+    <string name="str_used_title">Used</string>
+    <string name="str_created">Created</string>
     <string name="str_custom">Custom</string>
     <string name="str_system_chart_desc">(Available per Total)</string>
     <string name="str_app_chart_desc">(Created per Total)</string>
@@ -23,7 +23,15 @@
         <item>GB</item>
     </string-array>
 
-    <string name="str_noti_desc">Allocated %d memory</string>
+    <string name="str_noti_content">Holding allocated variables…</string>
+    <string name="str_mem_usage_title">App RAM usage</string>
+    <string name="str_last_used">Last used</string>
+    <string name="str_running_apps">Running Apps</string>
+    <string name="str_no_apps">No running app found!</string>
+    <string name="str_apps">apps</string>
+    <string name="str_used">Used</string>
+    <string name="str_speed_up">Speed up</string>
+    <string name="str_permission_explain">App needs <span style="color:blue; font-weight:bold">Usage data access</span> permission to help you manage running apps.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">Custom value</string>

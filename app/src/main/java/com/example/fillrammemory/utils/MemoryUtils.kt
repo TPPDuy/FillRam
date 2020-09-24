@@ -1,12 +1,17 @@
 package com.example.fillrammemory.utils
 
 import android.app.ActivityManager
+import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.fillrammemory.classes.AppInfo
-import com.example.fillrammemory.services.MemoryService
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MemoryUtils(var context: Context) {
 
@@ -45,20 +50,72 @@ class MemoryUtils(var context: Context) {
         return ((memoryInfo.availMem.toDouble() / memoryInfo.totalMem) * 100).toInt()
     }
 
-    fun getRunningApp(): List<AppInfo>{
+    private fun getAppInfo(packageName: String): AppInfo?{
+        return try{
+            if (packageName == context.packageName) return null //eliminate current app
+
+            val packageManager = context.packageManager
+            val app = packageManager.getApplicationInfo(packageName, 0)
+            if ((app.flags.and(ApplicationInfo.FLAG_STOPPED)) != 0) null
+            else AppInfo(
+                packageName,
+                packageManager.getApplicationLabel(app).toString(),
+                packageManager.getApplicationIcon(app),
+                0
+            )
+        } catch (ex: PackageManager.NameNotFoundException){
+            null
+        }
+
+    }
+    fun getRunningAppPreLollipop(): ArrayList<AppInfo>{
         val result = ArrayList<AppInfo>()
         val packageManager = context.packageManager
         val runningAppProcesses = activityManager.runningAppProcesses
 
         for (appProcessInfo in runningAppProcesses){
-            val appInfo = packageManager.getApplicationInfo(appProcessInfo.processName, PackageManager.GET_META_DATA)
+            val appInfo = packageManager.getApplicationInfo(
+                appProcessInfo.processName,
+                PackageManager.GET_META_DATA
+            )
             val label = packageManager.getApplicationLabel(appInfo)
             val icon = packageManager.getApplicationIcon(appInfo)
             val pid = appProcessInfo.pid
-            val memUsage = activityManager.getProcessMemoryInfo(IntArray(1).apply { set(0, pid) }).get(0).totalPss
-            result.add(AppInfo(label.toString(), icon, memUsage))
+            val memUsage = activityManager.getProcessMemoryInfo(IntArray(1).apply { set(0, pid) })[0].totalPss*1000.toLong()
+            result.add(
+                AppInfo(
+                    packageManager.getPackageInfo(
+                        appProcessInfo.processName,
+                        PackageManager.GET_META_DATA
+                    ).packageName, label.toString(), icon, memUsage
+                )
+            )
         }
         return result
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    fun getRunningAppPostLollipop() : ArrayList<AppInfo>{
+        val result = ArrayList<AppInfo>()
+        val calendar: Calendar = Calendar.getInstance()
+        val endTime: Long = calendar.timeInMillis
+        calendar.add(Calendar.SECOND, -5)
+        val startTime: Long = calendar.timeInMillis
+        val usm: UsageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
+        for (us in usageStatsList){
+            Log.d("TIME USED", us.lastTimeUsed.toString())
+           if (us.lastTimeUsed > 100000) {
+                val appInfo = getAppInfo(us.packageName)
+                appInfo?.lastTimeUsed = us.lastTimeUsed
+                if (appInfo != null) result.add(appInfo)
+           }
+        }
+        return result
+    }
+
+    fun killProcessByPackageName(packageName: String){
+        activityManager.killBackgroundProcesses(packageName)
     }
 
     private fun convertMBToBytes(mbValue: Long): Long {
@@ -88,15 +145,6 @@ class MemoryUtils(var context: Context) {
         return convertValue;
     }
 
-    /*fun getMemoryInfo() {
-        val info = " Available Memory =  ${formatToString(memoryInfo.availMem)}\n" +
-                "  Total Memory = ${formatToString(memoryInfo.totalMem)}\n" +
-                "  Runtime Max Memory =  ${formatToString(runtime.maxMemory())}\n" +
-                "  Runtime Total Memory = ${formatToString(runtime.totalMemory())}\n" +
-                "  Runtime Free Memory = ${formatToString(runtime.freeMemory())}"
-        Log.d(MemoryService.TAG , info)
-    }*/
-
     fun isAvailableAdded(value: Long, unit: String) : Boolean {
         var convertValue: Double = 0.00
         when(unit){
@@ -111,10 +159,10 @@ class MemoryUtils(var context: Context) {
             }
         }
         updateMemInfo()
-       Log.d("TAG", convertValue.toString())
+        Log.d("TAG", convertValue.toString())
 
-        val availableMem = memoryInfo.availMem.div(1024*1024).div(MBToKB).toDouble()
-    Log.d("TAG",availableMem.toString())
+        val availableMem = memoryInfo.availMem.div(1024 * 1024).div(MBToKB).toDouble()
+        Log.d("TAG", availableMem.toString())
 
         if(convertValue <= availableMem) {
             return true
@@ -125,9 +173,9 @@ class MemoryUtils(var context: Context) {
     companion object{
         private const val MBToKB = 1024.0
         private const val GBToKB = 1024.0 * 1024.0
-        private const val MBToB = 1024 * 1024
-        private const val GBToB = 1024 * 1024 * 1024
-        private const val KBToB = 1024
+        private const val MBToB = 1024.0 * 1024.0
+        private const val GBToB = 1024.0 * 1024.0 * 1024.0
+        private const val KBToB = 1024.0
 
         private var instance: MemoryUtils? = null
 
@@ -137,19 +185,21 @@ class MemoryUtils(var context: Context) {
             return instance as MemoryUtils
         }
 
-        fun formatToString(value: Long): String {
+        fun formatToString(byteValue: Long): String {
             val twoDecimalFormat = DecimalFormat("#.##")
-            val mbValue = value.div(1024).div(MBToKB)
-            val gbValue = value.div(1024).div(GBToKB)
-            val result : String
-            result = if (gbValue > 1) {
-                twoDecimalFormat.format(gbValue).plus(" GB")
-            } else if (mbValue > 1) {
-                twoDecimalFormat.format(mbValue).plus(" MB")
-            } else {
-                twoDecimalFormat.format(value).plus(" KB")
+            val mbValue = byteValue.div(KBToB).div(MBToKB)
+            val gbValue = byteValue.div(KBToB).div(GBToKB)
+            return when {
+                gbValue >= 1.0 -> {
+                    twoDecimalFormat.format(gbValue).plus("GB")
+                }
+                mbValue >= 1.0 -> {
+                    twoDecimalFormat.format(mbValue).plus("MB")
+                }
+                else -> {
+                    twoDecimalFormat.format(byteValue).plus("KB")
+                }
             }
-            return result
         }
 
         /*

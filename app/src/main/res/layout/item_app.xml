@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="@dimen/normal_space">
+    <ImageView
+        android:id="@+id/iconApp"
+        android:layout_width="@dimen/extra_large_space"
+        android:layout_height="@dimen/extra_large_space"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/normal_space"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_space"/>
+        <TextView
+            android:id="@+id/memUsage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/small_text"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/medium_space"
+        android:layout_height="@dimen/medium_space"
+        android:gravity="center"
+        android:button="@drawable/all_style_checkbox"
+        android:background="@null"
+        android:checked="true"/>
+</LinearLayout>
