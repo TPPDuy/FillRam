@@ -45,20 +45,20 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
         val intentFilter = IntentFilter()
         intentFilter.addAction(Constants.SYSTEM_INFO)
         intentFilter.addAction(Constants.UPDATE_STATE)
-        activity?.registerReceiver(systemBroadcast, intentFilter)
+        requireActivity().registerReceiver(systemBroadcast, intentFilter)
 
         //bind foreground service
         val intent = Intent(requireContext(), MemoryService::class.java)
         MemoryService.startServiceExecute(requireContext(), intent) //keep service run independently
-        activity?.bindService(intent, this, Context.BIND_IMPORTANT)
+        requireActivity().bindService(intent, this, Context.BIND_IMPORTANT)
 
         //observe ViewModel to update UI
         viewModel.getMemoryInfo().observe(viewLifecycleOwner, Observer<Memory>{ mem ->
             run {
-                totalValue.text = MemoryUtils.formatToString(mem.total)
-                availableValue.text = MemoryUtils.formatToString(mem.available)
-                usedValue.text = MemoryUtils.formatToString(mem.total.minus(mem.available))
-                createdValue.text = MemoryUtils.formatToString(mem.created)
+                totalValue.text = MemoryUtils.formatToString(mem.total.toLong())
+                availableValue.text = MemoryUtils.formatToString(mem.available.toLong())
+                //usedValue.text = MemoryUtils.formatToString(mem.total.minus(mem.available).toLong())
+                createdValue.text = MemoryUtils.formatToString(mem.created.toLong())
                 progressBar.progress = mem.availablePercent
                 progressPercentage.text = "${mem.availablePercent}%"
             }
@@ -66,8 +66,14 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
 
         viewModel.getUpdateMemoryState().observe(viewLifecycleOwner, Observer { state ->
             Log.d("Fragment", "Update progress state")
-            if (state) progressDialog.show()
-            else progressDialog.dismiss()
+            if (state) {
+                progressDialog.show()
+                MemoryService.setAllocateState(true)
+            }
+            else {
+                progressDialog.dismiss()
+                MemoryService.setAllocateState(false)
+            }
         })
     }
 
@@ -80,15 +86,15 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
         btn500.setOnClickListener(this)
         btn700.setOnClickListener(this)
         btnCustom.setOnClickListener(this)
-        //btnDeallocate.setOnClickListener(this)
+        btnDeallocate.setOnClickListener(this)
         //change status bar color
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.colorPrimaryDark)
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.colorPrimary)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         requireContext().unregisterReceiver(systemBroadcast)
-        requireContext().unbindService(this)
+        //requireContext().unbindService(this)
     }
 
 
@@ -126,16 +132,19 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
             R.id.btnCustom -> {
                 showDialog()
             }
-           /* R.id.btnDeallocate -> {
-                memoryService?.freeAllocatedVariable()
-            }*/
+            R.id.btnDeallocate -> {
+                memoryService?.handleFreeAllocated()
+            }
+            else -> {
+                Log.e("CLICK BUTTON", "Button is undefined")
+            }
         }
     }
 
     private fun handleIncreaseMem(value: Long, unit: String) =
         if(MemoryUtils.getInstance(requireContext()).isAvailableAdded(value, unit)) {
             if (MemoryService.isRunning)
-                memoryService?.allocateVariable(value, unit)
+                memoryService?.handleFillRam(value, unit)
             else
                 makeText1(requireContext(), "Wait until Service run again!", Toast.LENGTH_SHORT).show()
         } else {

@@ -16,7 +16,6 @@
             android:id="@+id/percentageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="70"
             android:textColor="@android:color/white"
             android:fontFamily="@font/opensans_semibold"
             android:textSize="@dimen/extra_large_text"
@@ -57,8 +56,8 @@
             android:textSize="@dimen/normal_text"
             android:textColor="@color/colorPrimary"
             android:text="@string/str_speed_up" />
-
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -74,14 +73,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_running_apps"/>
+                android:src="@drawable/ic_recent"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_regular"
                 android:textSize="@dimen/small_text"
                 android:textColor="@color/colorGrayText"
-                android:text="@string/str_running_apps"
+                android:text="@string/str_recent_use"
                 android:layout_marginStart="@dimen/small_space"
                 android:layout_weight="1"/>
             <TextView
@@ -91,16 +90,6 @@
                 android:fontFamily="@font/opensans_regular"
                 android:textSize="@dimen/small_text"
                 android:textColor="@color/colorPrimary"
-                android:visibility="gone"/>
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/checkboxAll"
-                android:layout_width="@dimen/medium_space"
-                android:layout_height="@dimen/medium_space"
-                android:layout_marginStart="@dimen/small_space"
-                android:gravity="center"
-                android:button="@drawable/all_style_checkbox"
-                android:background="@null"
-                android:checked="true"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -130,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_light"
-                        android:text="@string/str_no_apps"
+                        android:text="@string/str_no_app"
                         android:textColor="@color/colorGrayText"
                         android:textSize="@dimen/normal_text"
                         android:layout_marginTop="@dimen/medium_space"/>

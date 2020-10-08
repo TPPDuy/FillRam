@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="@dimen/large_space"
+    android:padding="@dimen/medium_space"
     android:orientation="vertical">
     <ImageView
         android:layout_width="@dimen/extra_large_space"
@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:text="@string/str_permission_explain"
         android:fontFamily="@font/opensans_regular"
-        android:layout_marginTop="@dimen/medium_space"/>
+        android:layout_marginTop="@dimen/medium_space"
+        android:textSize="@dimen/small_text"
+        android:gravity="center"/>
     <TextView
         android:id="@+id/btn_accept"
         android:layout_width="match_parent"

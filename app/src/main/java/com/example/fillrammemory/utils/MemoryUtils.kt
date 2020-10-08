@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Debug
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.fillrammemory.classes.AppInfo
@@ -38,6 +39,8 @@ class MemoryUtils(var context: Context) {
         return memoryInfo.availMem
     }
 
+
+
     fun isLowMem(): Boolean{
         return memoryInfo.lowMemory
     }
@@ -53,7 +56,6 @@ class MemoryUtils(var context: Context) {
     private fun getAppInfo(packageName: String): AppInfo?{
         return try{
             if (packageName == context.packageName) return null //eliminate current app
-
             val packageManager = context.packageManager
             val app = packageManager.getApplicationInfo(packageName, 0)
             if ((app.flags.and(ApplicationInfo.FLAG_STOPPED)) != 0) null
@@ -102,7 +104,7 @@ class MemoryUtils(var context: Context) {
         calendar.add(Calendar.SECOND, -5)
         val startTime: Long = calendar.timeInMillis
         val usm: UsageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
+        val usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_BEST, startTime, endTime)
         for (us in usageStatsList){
             Log.d("TIME USED", us.lastTimeUsed.toString())
            if (us.lastTimeUsed > 100000) {
@@ -146,22 +148,24 @@ class MemoryUtils(var context: Context) {
     }
 
     fun isAvailableAdded(value: Long, unit: String) : Boolean {
+        //so sánh dựa trên đơn vị KB
         var convertValue: Double = 0.00
         when(unit){
-            "KB" -> {
+           /* "KB" -> {
                 convertValue = value.div(1024).div(GBToKB)
-            }
+            }*/
             "MB" -> {
-                convertValue = value.div(1024).toDouble()
+                convertValue = value.times(MBToKB.toDouble())
             }
             "GB" -> {
-                convertValue = value.toDouble()
+                convertValue = value.times(GBToKB.toDouble())
             }
         }
         updateMemInfo()
         Log.d("TAG", convertValue.toString())
 
-        val availableMem = memoryInfo.availMem.div(1024 * 1024).div(MBToKB).toDouble()
+
+        val availableMem = memoryInfo.availMem.div(KBToB)
         Log.d("TAG", availableMem.toString())
 
         if(convertValue <= availableMem) {
@@ -171,11 +175,11 @@ class MemoryUtils(var context: Context) {
     }
 
     companion object{
-        private const val MBToKB = 1024.0
-        private const val GBToKB = 1024.0 * 1024.0
-        private const val MBToB = 1024.0 * 1024.0
-        private const val GBToB = 1024.0 * 1024.0 * 1024.0
-        private const val KBToB = 1024.0
+        private const val MBToKB = 1024
+        private const val GBToKB = 1024 * 1024
+        private const val MBToB = 1024 * 1024
+        private const val GBToB = 1024 * 1024 * 1024
+        private const val KBToB = 1024
 
         private var instance: MemoryUtils? = null
 
@@ -186,9 +190,10 @@ class MemoryUtils(var context: Context) {
         }
 
         fun formatToString(byteValue: Long): String {
-            val twoDecimalFormat = DecimalFormat("#.##")
-            val mbValue = byteValue.div(KBToB).div(MBToKB)
-            val gbValue = byteValue.div(KBToB).div(GBToKB)
+            val twoDecimalFormat = DecimalFormat("###.#")
+            var mbValue = byteValue.div(KBToB).div(MBToKB).toDouble()
+            var gbValue = byteValue.div(KBToB.toDouble()).div(GBToKB.toDouble())
+
             return when {
                 gbValue >= 1.0 -> {
                     twoDecimalFormat.format(gbValue).plus("GB")
@@ -201,37 +206,5 @@ class MemoryUtils(var context: Context) {
                 }
             }
         }
-
-        /*
-        * type:
-        * 1 - Total
-        * 2 - Free
-        * *//*
-        fun readRamFromSystem(type: Int): Double {
-            val reader: RandomAccessFile
-            try {
-                reader = RandomAccessFile("/proc/meminfo", "r")
-                var resultMem = 0.0
-                var loadLine = ""
-                loadLine = reader.readLine()
-                if (type == 2) loadLine = reader.readLine()
-
-                val p = Pattern.compile("(\\d+)")
-                val m = p.matcher(loadLine)
-                var value: String? = null
-                while (m.find()) {
-                    value = m.group(1)
-                }
-                reader.close()
-                resultMem = value?.toDouble() ?: 0.0
-
-                return resultMem
-
-            } catch(exception:IOException){
-                exception.printStackTrace()
-                return 0.0
-            }
-        }*/
-
     }
 }

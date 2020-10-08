@@ -6,10 +6,11 @@
     <string name="str_ram_usage">Ram usage</string>
     <string name="str_total">Total</string>
     <string name="str_available">Available</string>
-    <string name="str_used_title">Used</string>
+    <string name="str_used_title">App Used</string>
     <string name="str_created">Created</string>
     <string name="str_custom">Custom</string>
     <string name="str_system_chart_desc">(Available per Total)</string>
+    <string name="str_pick_value">Pick a value below to fill Ram</string>
     <string name="str_app_chart_desc">(Created per Total)</string>
     <string name="str_unit_mb">MB</string>
     <string name="str_unit_gb">GB</string>
@@ -23,11 +24,14 @@
         <item>GB</item>
     </string-array>
 
+    <string name="str_free_allocation">Free</string>
+    <string name="str_stop_service">Stop</string>
+    <string name="str_noti_title">Running</string>
     <string name="str_noti_content">Holding allocated variables…</string>
     <string name="str_mem_usage_title">App RAM usage</string>
     <string name="str_last_used">Last used</string>
-    <string name="str_running_apps">Running Apps</string>
-    <string name="str_no_apps">No running app found!</string>
+    <string name="str_recent_use">Recent apps used</string>
+    <string name="str_no_app">No app found!</string>
     <string name="str_apps">apps</string>
     <string name="str_used">Used</string>
     <string name="str_speed_up">Speed up</string>

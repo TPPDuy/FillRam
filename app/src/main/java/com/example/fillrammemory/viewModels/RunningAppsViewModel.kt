@@ -6,6 +6,8 @@ import android.content.Context
 import android.os.*
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.example.fillrammemory.classes.AppInfo
 import com.example.fillrammemory.utils.Constants
 import com.example.fillrammemory.utils.MemoryUtils
@@ -18,21 +20,16 @@ class RunningAppsViewModel(application: Application): AndroidViewModel(applicati
     private val threadPool = Executors.newFixedThreadPool(1)
     private val context = getApplication<Application>().applicationContext
 
-    init {
-        if(Utils.checkPermission(context))
+    init{
+        if (Utils.checkPermission(context))
             retrieveRunningApps()
     }
+
     fun retrieveRunningApps(){
         threadPool.execute(this)
     }
     fun getRunningApps(): MutableLiveData<ArrayList<AppInfo>>{
         return runningApps
-    }
-    fun shutDownThreadPool(){
-        threadPool.shutdown()
-    }
-    fun setRunningApps(apps: ArrayList<AppInfo>){
-        runningApps.value = apps
     }
     override fun run() {
         val result = (
@@ -48,7 +45,6 @@ class RunningAppsViewModel(application: Application): AndroidViewModel(applicati
         msg.data = bundle
         mainHandler.sendMessageAtFrontOfQueue(msg)
     }
-
     override fun handleMessage(msg: Message): Boolean {
         if(msg.what == 1){
             val listApp = (msg.data as Bundle).get(Constants.DATA) as ArrayList<*>

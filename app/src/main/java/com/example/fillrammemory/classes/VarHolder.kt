@@ -28,9 +28,38 @@ class VarHolder<T> {
         }
     }
 
+    fun getAt(index: Int): T? {
+        return if (index >= mAllocations.size) null
+        else mAllocations[index]
+    }
+
+    fun removeLastElement():T?{
+        return if(mAllocations.isEmpty()) null
+        else mAllocations.removeAt(mAllocations.size - 1)
+    }
+
+    fun getLastElement(): T? {
+        return if(mAllocations.isEmpty()) null
+        else mAllocations[mAllocations.size - 1]
+    }
+
     fun clearAll() {
         synchronized(mAllocations){
             mAllocations.clear()
         }
+    }
+
+    fun getSumSize(): Long{
+        var size: Long = 0
+        synchronized(mAllocations){
+            for (i in 0 until mAllocations.size){
+                size += (mAllocations[i] as ByteArray).size
+            }
+            return size
+        }
+    }
+
+    fun getLength(): Int{
+        return mAllocations.size
     }
 }

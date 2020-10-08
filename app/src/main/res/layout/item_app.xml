@@ -34,12 +34,4 @@
             android:textSize="@dimen/small_text"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="@dimen/medium_space"
-        android:layout_height="@dimen/medium_space"
-        android:gravity="center"
-        android:button="@drawable/all_style_checkbox"
-        android:background="@null"
-        android:checked="true"/>
 </LinearLayout>

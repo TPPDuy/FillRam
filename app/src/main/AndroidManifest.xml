@@ -35,7 +35,8 @@
             android:name=".broadcast.NotificationBroadcast"
             android:enabled="true">
             <intent-filter>
-                <action android:name="notification button clicked"/>
+                <action android:name="FREE_ACTION"/>
+                <action android:name="STOP_ACTION"/>
             </intent-filter>
         </receiver>
     </application>

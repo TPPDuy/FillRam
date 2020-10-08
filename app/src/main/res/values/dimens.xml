@@ -15,7 +15,7 @@
     <dimen name="img_size_normal">60dp</dimen>
     <dimen name="img_size_medium">75dp</dimen>
     <dimen name="img_size_extra_medium">100dp</dimen>
-    <dimen name="huge_space">280dp</dimen>
+    <dimen name="huge_space">230dp</dimen>
     <dimen name="normal_radius">5dp</dimen>
 
     <dimen name="padding_medium">10dp</dimen>

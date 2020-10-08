@@ -2,7 +2,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,128 +10,18 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_space"/>
-    <!--<GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:layout_marginHorizontal="@dimen/normal_space">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_columnWeight="1"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/totalTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/str_total"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:id="@+id/totalValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_columnWeight="1"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_gravity="end"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/usedTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/str_used_title"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:id="@+id/usedValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_columnWeight="1"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_gravity="start"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/normal_space">
-            <TextView
-                android:id="@+id/availableTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/str_available"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:id="@+id/availableValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_columnWeight="1"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_gravity="end"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/normal_space">
-            <TextView
-                android:id="@+id/createdTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/str_created"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:id="@+id/createdValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/normal_text"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-    </GridLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:weightSum="2"
+        android:paddingHorizontal="@dimen/normal_space">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/small_space"
             android:baselineAligned="false">
             <LinearLayout
                 android:layout_width="@dimen/img_size_extra_medium"
@@ -161,7 +50,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="@dimen/normal_space"/>
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="@dimen/img_size_extra_medium"
                 android:layout_height="@dimen/img_size_extra_medium"
                 android:orientation="vertical"
@@ -187,7 +76,7 @@
             </LinearLayout>
             <Space
                 android:layout_width="0dp"
-                android:layout_height="@dimen/normal_space"/>
+                android:layout_height="@dimen/normal_space"/>-->
             <LinearLayout
                 android:layout_width="@dimen/img_size_extra_medium"
                 android:layout_height="@dimen/img_size_extra_medium"
@@ -227,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/str_created"
+                    android:text="@string/str_used_title"
                     android:textSize="@dimen/small_text"
                     android:textColor="@color/colorPrimary" />
                 <TextView
@@ -240,19 +129,23 @@
                     android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <RelativeLayout
                 android:id="@+id/progressWrapper"
-                android:layout_width="@dimen/huge_space"
-                android:layout_height="@dimen/huge_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/huge_space"
+                    android:layout_height="@dimen/huge_space"
                     android:layout_centerInParent="true"
                     android:progressDrawable="@drawable/pie_chart_state_full"
                     android:indeterminate="false"
@@ -261,8 +154,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/huge_space"
+                    android:layout_height="@dimen/huge_space"
                     android:layout_centerInParent="true"
                     android:progressDrawable="@drawable/pie_chart_state_progress"
                     android:indeterminate="false"
@@ -273,7 +166,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="0%"
                     android:textSize="@dimen/medium_text"
                     android:textColor="@android:color/black" />
             </RelativeLayout>
@@ -282,123 +174,132 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/str_system_chart_desc"
-                android:fontFamily="@font/opensans_light"
+                android:fontFamily="@font/opensans_regular"
                 android:textSize="@dimen/small_text"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/small_space"/>
         </LinearLayout>
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_space"/>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="1"
-        android:layout_weight="1"
-        android:paddingHorizontal="@dimen/normal_space"
-        android:paddingVertical="@dimen/medium_space">
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn100"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+100MB" />
-            <Space
-                android:layout_width="@dimen/normal_space"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/btn200"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+200MB" />
-            <Space
-                android:layout_width="@dimen/normal_space"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/btn400"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+400MB" />
-        </LinearLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normal_space"/>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn500"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+500MB" />
-            <Space
-                android:layout_width="@dimen/normal_space"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/btn700"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+700MB" />
-            <Space
-                android:layout_width="@dimen/normal_space"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/btn1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="+1GB" />
-        </LinearLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normal_space"/>
-        <Button
-            android:id="@+id/btnCustom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/opensans_regular"
-            android:background="@drawable/white_round_corner_background"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:text="@string/str_custom" />
-    </GridLayout>
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnDeallocate"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/normal_space"
-        android:elevation="7dp"
-        app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_free_memory"
-        app:fabSize="normal"/>-->
+        android:padding="@dimen/normal_space"
+        android:fontFamily="@font/opensans_regular"
+        android:textSize="@dimen/small_text"
+        android:textColor="@android:color/black"
+        android:text="@string/str_pick_value"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:paddingHorizontal="@dimen/normal_space">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn100"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+100MB" />
+                <Space
+                    android:layout_width="@dimen/normal_space"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:id="@+id/btn200"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+200MB" />
+                <Space
+                    android:layout_width="@dimen/normal_space"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:id="@+id/btn400"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+400MB" />
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normal_space"/>
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn500"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+500MB" />
+                <Space
+                    android:layout_width="@dimen/normal_space"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:id="@+id/btn700"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+700MB" />
+                <Space
+                    android:layout_width="@dimen/normal_space"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:id="@+id/btn1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="+1GB" />
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normal_space"/>
+            <Button
+                android:id="@+id/btnCustom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/opensans_regular"
+                android:background="@drawable/white_round_corner_background"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="@string/str_custom" />
+        </GridLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnDeallocate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/normal_space"
+            android:elevation="7dp"
+            app:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ic_free_memory"
+            app:fabSize="normal"/>
+    </FrameLayout>
 </LinearLayout>

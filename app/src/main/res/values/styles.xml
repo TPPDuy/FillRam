@@ -13,6 +13,7 @@
         <item name="fontFamily">@font/opensans_regular</item>
     </style>
 
+
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_from_left_anim</item>
         <item name="android:windowExitAnimation">@anim/slide_to_right_anim</item>

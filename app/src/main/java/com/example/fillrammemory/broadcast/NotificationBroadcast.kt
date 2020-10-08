@@ -10,16 +10,14 @@ import com.example.fillrammemory.utils.Constants
 
 class NotificationBroadcast: BroadcastReceiver() {
     override fun onReceive(p0: Context, p1: Intent?) {
-        Log.d("Broadcast", "Receive intent")
-        when(p1?.getIntExtra(Constants.BUTTON_CLICKED, 0)){
-            R.id.btnFree -> {
-                Log.d("Broadcast", "Button Free Clicked")
-                MemoryService.getInstance().freeAllocatedVariable()
-            }
-            R.id.btnStop -> {
-                Log.d("Broadcast", "Button Stop Clicked")
-                MemoryService.stopService(p0)
-            }
+
+        val action = p1?.action ?: ""
+        if (action == "FREE_ACTION") {
+            Log.d("Broadcast", "Button Free Clicked")
+            MemoryService.getInstance().handleFreeAllocated()
+        } else if (action == "STOP_ACTION") {
+            Log.d("Broadcast", "Button Stop Clicked")
+            MemoryService.stopService(p0)
         }
         val closeIntent = Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
         p0.sendBroadcast(closeIntent)

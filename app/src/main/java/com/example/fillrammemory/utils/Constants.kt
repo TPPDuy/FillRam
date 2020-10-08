@@ -11,7 +11,9 @@ class Constants {
         const val MSG_UNIT = "Unit"
 
         const val SYSTEM_INFO = "System info"
-        const val NOTIFICATION_BUTTON_CLICKED = "notification button clicked"
+        const val NOTIFICATION_BUTTON_CLICKED = "NOTIF_BUTTON_CLICKED"
+        const val FREE_ACTION = "FREE_ACTION"
+        const val STOP_ACTION = "STOP_ACTION"
         const val CREATED_VAR = "Created var"
         const val UPDATE_STATE = "Update state"
 

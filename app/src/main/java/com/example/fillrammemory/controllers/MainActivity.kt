@@ -1,5 +1,6 @@
 package com.example.fillrammemory.controllers
 import android.os.*
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity(){
     override fun onStop() {
         super.onStop()
         getMemoryThread.quitSafely()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        Log.d("Main Activity", "trim memory $level");
     }
 }
 
