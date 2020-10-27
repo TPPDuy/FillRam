@@ -1,14 +1,18 @@
 package com.example.fillrammemory.controllers
 import android.annotation.SuppressLint
 import android.content.*
+import android.graphics.Color
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.fillrammemory.broadcast.MemoryInfoBroadcast
 import com.example.fillrammemory.classes.Memory
@@ -17,6 +21,7 @@ import com.example.fillrammemory.services.MemoryService
 import com.example.fillrammemory.utils.Constants
 import com.example.fillrammemory.utils.MemoryUtils
 import com.example.fillrammemory.viewModels.MemoryInfoViewModel
+import kotlinx.android.synthetic.main.expandable_fab.*
 import kotlinx.android.synthetic.main.fragment_gen_var.*
 import android.widget.Toast.makeText as makeText1
 
@@ -26,6 +31,13 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
     private val viewModel: MemoryInfoViewModel by activityViewModels()
     private var memoryService: MemoryService? = null
     private lateinit var progressDialog: ProgressDialog
+
+    private lateinit var fabCloseAnim: Animation
+    private lateinit var fabOpenAnim: Animation
+    private lateinit var fabRotateClockAnim: Animation
+    private lateinit var fabRotateAntiClockAnim: Animation
+    private var fabExpandState = MutableLiveData<Boolean>(false)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +64,28 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
         MemoryService.startServiceExecute(requireContext(), intent) //keep service run independently
         requireActivity().bindService(intent, this, Context.BIND_IMPORTANT)
 
+        initView();
+    }
+
+    private fun initView(){
+        fabCloseAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
+        fabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+        fabRotateClockAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_clock)
+        fabRotateAntiClockAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_rotate_anticlock)
+        btn1.setOnClickListener(this)
+        btn100.setOnClickListener(this)
+        btn200.setOnClickListener(this)
+        btn400.setOnClickListener(this)
+        btn500.setOnClickListener(this)
+        btn700.setOnClickListener(this)
+        btnCustom.setOnClickListener(this)
+        btnDeallocate.setOnClickListener(this)
+        overlayLayout.setOnClickListener(this)
+        btnDeallocateAll.setOnClickListener(this)
+        btnDeallocateCustom.setOnClickListener(this)
+        //change status bar color
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.colorPrimary)
+
         //observe ViewModel to update UI
         viewModel.getMemoryInfo().observe(viewLifecycleOwner, Observer<Memory>{ mem ->
             run {
@@ -75,20 +109,10 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
                 MemoryService.setAllocateState(false)
             }
         })
-    }
 
-    override fun onStart() {
-        super.onStart()
-        btn1.setOnClickListener(this)
-        btn100.setOnClickListener(this)
-        btn200.setOnClickListener(this)
-        btn400.setOnClickListener(this)
-        btn500.setOnClickListener(this)
-        btn700.setOnClickListener(this)
-        btnCustom.setOnClickListener(this)
-        btnDeallocate.setOnClickListener(this)
-        //change status bar color
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.colorPrimary)
+        fabExpandState.observe(viewLifecycleOwner, Observer { state ->
+            handleFabExpandState(state)
+        })
     }
 
     override fun onDestroy() {
@@ -133,7 +157,17 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
                 showDialog()
             }
             R.id.btnDeallocate -> {
+                fabExpandState.value = !(fabExpandState.value ?: false)
+            }
+            R.id.btnDeallocateAll -> {
+                fabExpandState.value = false
                 memoryService?.handleFreeAllocated()
+            }
+            R.id.btnDeallocateCustom -> {
+                Log.e("CLICK BUTTON", "Deallocate by chunk")
+            }
+            R.id.overlayLayout -> {
+                fabExpandState.value = false
             }
             else -> {
                 Log.e("CLICK BUTTON", "Button is undefined")
@@ -155,6 +189,38 @@ class GenVarFragment : Fragment(), View.OnClickListener, CustomSizeDialog.Dialog
         val customSizeDialog = CustomSizeDialog.newInstance();
         customSizeDialog.setTargetFragment(this, CustomSizeDialog.TARGET)
         parentFragmentManager.let { customSizeDialog.show(it, CustomSizeDialog.TAG) }
+    }
+
+    private fun handleFabExpandState(isOpen: Boolean){
+        if (!isOpen){
+            text_custom.visibility = View.INVISIBLE
+            text_free_all.visibility = View.INVISIBLE
+            overlayLayout.setBackgroundColor(Color.TRANSPARENT)
+            mainLayout.isClickable = true
+            btnDeallocateAll.run {
+                startAnimation(fabCloseAnim)
+                isClickable = false
+            }
+            btnDeallocateCustom.run{
+                startAnimation(fabCloseAnim)
+                isClickable = false
+            }
+        } else{
+            text_custom.visibility = View.VISIBLE
+            text_free_all.visibility = View.VISIBLE
+            overlayLayout.setBackgroundColor(Color.argb(80, 0, 0, 0))
+            overlayLayout.requestFocus()
+            overlayLayout.isClickable = true
+            mainLayout.isClickable = false
+            btnDeallocateAll.run {
+                startAnimation(fabOpenAnim)
+                isClickable = true
+            }
+            btnDeallocateCustom.run{
+                startAnimation(fabOpenAnim)
+                isClickable = true
+            }
+        }
     }
 
     override fun onFinishDialog(value: Long, unit: String) {

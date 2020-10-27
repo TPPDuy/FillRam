@@ -31,7 +31,7 @@ class GetMemoryThread(threadName: String, val context: Context) : HandlerThread(
             memoryInfo = Memory(
                 total = memoryUtils.getTotalRam().toDouble(),
                 available = memoryUtils.getAvailableRam().toDouble(),
-                created = /*MemoryService.getAllocationSize().toDouble()*/MemoryService.mAllocationSize.toDouble(),
+                created = MemoryService.mAllocationSize.toDouble(),
                 availablePercent = memoryUtils.getAvailableMemInPercentage()
             )
             val intent = Intent()

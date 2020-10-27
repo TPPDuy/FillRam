@@ -1,199 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimaryBackground">
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_space"/>
-
     <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:weightSum="2"
-        android:paddingHorizontal="@dimen/normal_space">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:baselineAligned="false">
-            <LinearLayout
-                android:layout_width="@dimen/img_size_extra_medium"
-                android:layout_height="@dimen/img_size_extra_medium"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/item_background"
-                android:padding="@dimen/small_space">
-                <TextView
-                    android:id="@+id/totalTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/str_total"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/totalValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_small_space"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/normal_text"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="@dimen/normal_space"/>
-            <!--<LinearLayout
-                android:layout_width="@dimen/img_size_extra_medium"
-                android:layout_height="@dimen/img_size_extra_medium"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/item_background"
-                android:padding="@dimen/small_space">
-                <TextView
-                    android:id="@+id/usedTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/str_used_title"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/usedValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_small_space"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/normal_text"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="@dimen/normal_space"/>-->
-            <LinearLayout
-                android:layout_width="@dimen/img_size_extra_medium"
-                android:layout_height="@dimen/img_size_extra_medium"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/item_background"
-                android:padding="@dimen/small_space">
-                <TextView
-                    android:id="@+id/availableTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/str_available"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/availableValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_small_space"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/normal_text"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="@dimen/normal_space"/>
-            <LinearLayout
-                android:layout_width="@dimen/img_size_extra_medium"
-                android:layout_height="@dimen/img_size_extra_medium"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/item_background"
-                android:padding="@dimen/small_space">
-                <TextView
-                    android:id="@+id/createdTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/str_used_title"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/createdValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/extra_small_space"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/normal_text"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-        </LinearLayout>
+        android:orientation="vertical">
         <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/medium_space"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:id="@+id/progressWrapper"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:paddingHorizontal="@dimen/normal_space">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-                <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/huge_space"
-                    android:layout_height="@dimen/huge_space"
-                    android:layout_centerInParent="true"
-                    android:progressDrawable="@drawable/pie_chart_state_full"
-                    android:indeterminate="false"
-                    android:max="100"
-                    android:progress="100" />
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/huge_space"
-                    android:layout_height="@dimen/huge_space"
-                    android:layout_centerInParent="true"
-                    android:progressDrawable="@drawable/pie_chart_state_progress"
-                    android:indeterminate="false"
-                    android:max="100" />
-                <TextView
-                    android:id="@+id/progressPercentage"
+                android:orientation="vertical"
+                android:baselineAligned="false">
+                <LinearLayout
+                    android:layout_width="@dimen/img_size_extra_medium"
+                    android:layout_height="@dimen/img_size_extra_medium"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/item_background"
+                    android:padding="@dimen/small_space">
+                    <TextView
+                        android:id="@+id/totalTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/str_total"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="@color/colorPrimary" />
+                    <TextView
+                        android:id="@+id/totalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/extra_small_space"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textSize="@dimen/normal_text"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/normal_space"/>
+                <LinearLayout
+                    android:layout_width="@dimen/img_size_extra_medium"
+                    android:layout_height="@dimen/img_size_extra_medium"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/item_background"
+                    android:padding="@dimen/small_space">
+                    <TextView
+                        android:id="@+id/availableTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/str_available"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="@color/colorPrimary" />
+                    <TextView
+                        android:id="@+id/availableValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/extra_small_space"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textSize="@dimen/normal_text"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/normal_space"/>
+                <LinearLayout
+                    android:layout_width="@dimen/img_size_extra_medium"
+                    android:layout_height="@dimen/img_size_extra_medium"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/item_background"
+                    android:padding="@dimen/small_space">
+                    <TextView
+                        android:id="@+id/createdTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/str_used_title"
+                        android:textSize="@dimen/small_text"
+                        android:textColor="@color/colorPrimary" />
+                    <TextView
+                        android:id="@+id/createdValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/extra_small_space"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textSize="@dimen/normal_text"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/progressWrapper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:textSize="@dimen/medium_text"
-                    android:textColor="@android:color/black" />
-            </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/str_system_chart_desc"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/small_text"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="@dimen/small_space"/>
+                    android:layout_gravity="center">
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="@dimen/huge_space"
+                        android:layout_height="@dimen/huge_space"
+                        android:layout_centerInParent="true"
+                        android:progressDrawable="@drawable/pie_chart_state_full"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="100" />
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="@dimen/huge_space"
+                        android:layout_height="@dimen/huge_space"
+                        android:layout_centerInParent="true"
+                        android:progressDrawable="@drawable/pie_chart_state_progress"
+                        android:indeterminate="false"
+                        android:max="100" />
+                    <TextView
+                        android:id="@+id/progressPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@android:color/black" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/str_system_chart_desc"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="@dimen/small_space"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/normal_space"
-        android:fontFamily="@font/opensans_regular"
-        android:textSize="@dimen/small_text"
-        android:textColor="@android:color/black"
-        android:text="@string/str_pick_value"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/normal_space"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/small_text"
+            android:textColor="@android:color/black"
+            android:text="@string/str_pick_value"/>
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -291,15 +261,15 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:text="@string/str_custom" />
         </GridLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnDeallocate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/normal_space"
-            android:elevation="7dp"
-            app:backgroundTint="@color/colorPrimary"
-            android:src="@drawable/ic_free_memory"
-            app:fabSize="normal"/>
-    </FrameLayout>
-</LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/overlayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/expandable_fab" />
+    </LinearLayout>
+
+</FrameLayout>
+
