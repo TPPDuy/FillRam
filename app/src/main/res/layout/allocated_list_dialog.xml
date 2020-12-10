@@ -17,12 +17,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Title"
-            android:fontFamily="@font/opensans_semibold"
+            android:text="Free Allocated Vars"
+            android:fontFamily="@font/opensans_regular"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/medium_text" />
+            android:textSize="@dimen/normal_text" />
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_dismiss"
+            android:id="@+id/btnDismiss"
             android:layout_width="@dimen/medium_space"
             android:layout_height="@dimen/medium_space"
             app:srcCompat="@drawable/ic_close_white"/>
@@ -36,7 +36,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <LinearLayout
-                android:id="@+id/layout_empty"
+                android:id="@+id/layoutEmpty"
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
                 android:gravity="center"
@@ -53,27 +53,29 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_space"
                     android:text="No allocated var"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/normal_text"
+                    android:fontFamily="@font/opensans_light"
+                    android:textSize="@dimen/small_text"
                     android:textColor="@color/colorGrayText"
                     android:textAlignment="center"/>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/normal_space"
+                android:paddingHorizontal="@dimen/normal_space"
                 android:background="@android:color/transparent"
                 android:layoutAnimation="@anim/layout_fall_down_anim"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </FrameLayout>
         <Button
+            android:id="@+id/btnFree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Free"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:fontFamily="@font/opensans_semibold"
+            android:fontFamily="@font/opensans_regular"
             android:textSize="@dimen/normal_text"
             android:background="@drawable/light_orange_round_corner_background"
             android:layout_margin="@dimen/normal_space">

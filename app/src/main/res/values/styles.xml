@@ -10,13 +10,13 @@
     </style>
 
     <style name="BottomNavStyle" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/opensans_regular</item>
-    </style>
+        <item name="fontFamily">@font/opensans_light</item>
+=    </style>
 
 
     <style name="DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/slide_from_left_anim</item>
-        <item name="android:windowExitAnimation">@anim/slide_to_right_anim</item>
+        <item name="android:windowEnterAnimation">@anim/slide_up_anim</item>
+        <item name="android:windowExitAnimation">@anim/slide_down_anim</item>
     </style>
 
     <style name="CoreTheme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">

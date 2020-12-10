@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0097F0</color>
+    <!--<color name="colorPrimary">#0097F0</color>-->
+    <color name="colorPrimary">#F0A471</color>
+
     <color name="colorPrimaryDark">#001D78</color>
+    <color name="colorBlue">#2E91CC</color>
+    <color name="colorHalfBaked">#82BCD8</color>
     <color name="colorAccent">#00E7F0</color>
     <color name="colorPrimaryLight">#D9A9DDFB</color>
 
     <color name="colorGray">#D0D0D0</color>
-    <color name="colorLightGray">#e5e5e5</color>
+    <color name="colorGrayLight">#e5e5e5</color>
     <color name="colorGrayText">#636363</color>
+    <color name="colorGrayPale">#CFD6D8</color>
+    <color name="colorDawn">#A5A3A1</color>
 
     <color name="colorPrimaryBackground">#f0f2f5</color>
     <color name="colorBlueLightBackground">#D0A2F8FB</color>
 
     <color name="colorOrange">#FF6F22</color>
     <color name="colorOrangeLight">#FFB83F</color>
+    <color name="colorOrangePale">#F0A471</color>
+    <color name="colorOrangeDark">#CE492B</color>
+    <color name="colorOrangeExtraLight">#FCF6ED</color>
 
-    <color name="colorGreen">#3DCD1D</color>
-    <color name="colorGreenLight">#92FD85</color>
+    <color name="colorAthensGray">#F9FAFB</color>
+    <color name="colorAthensGrayDarker">#ECEFF3</color>
+    <color name="colorBottomNavBackground">#F2F6F8</color>
+
+    <color name="colorGreen">#66BD6B</color>
+    <color name="colorGreenLight">#85DC99</color>
 
     <color name="colorSecondary">#A87E6F</color>
+
+    <color name="colorAcapulco">#77C5BB</color>
 </resources>

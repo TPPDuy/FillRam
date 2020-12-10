@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/small_space">
     <ImageView
-        android:layout_width="@dimen/large_space"
-        android:layout_height="@dimen/large_space"
+        android:layout_width="@dimen/medium_space"
+        android:layout_height="@dimen/medium_space"
         android:src="@drawable/ic_one_object"/>
     <LinearLayout
         android:layout_width="0dp"
@@ -15,27 +16,27 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/normal_space">
         <TextView
-            android:id="@+id/valueText"
+            android:id="@+id/variableIndex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1GB"
+            android:text="Variable 1"
             android:textColor="@android:color/black"
-            android:fontFamily="@font/opensans_semibold"
+            android:fontFamily="@font/opensans_regular"
             android:textSize="@dimen/normal_text"/>
         <TextView
-            android:id="@+id/createdTimeText"
+            android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Created at: 14:37 26/10/2020"
+            android:text="Size: 123MB"
             android:textColor="@color/colorGrayText"
-            android:fontFamily="@font/opensans_semibold"
+            android:fontFamily="@font/opensans_light"
             android:textSize="@dimen/small_text"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkbox"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:button="@drawable/checkbox"
-        android:checked="true"/>
+        android:checked="false"/>
 </LinearLayout>

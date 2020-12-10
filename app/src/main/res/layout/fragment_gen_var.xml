@@ -4,15 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryBackground">
+    android:background="@drawable/gradient_background">
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical">
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/medium_space"/>
+        android:orientation="vertical"
+        android:gravity="center_vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +37,7 @@
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/str_total"
                         android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorDawn" />
                     <TextView
                         android:id="@+id/totalValue"
                         android:layout_width="wrap_content"
@@ -66,7 +64,7 @@
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/str_available"
                         android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorDawn" />
                     <TextView
                         android:id="@+id/availableValue"
                         android:layout_width="wrap_content"
@@ -93,7 +91,7 @@
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/str_used_title"
                         android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorDawn" />
                     <TextView
                         android:id="@+id/createdValue"
                         android:layout_width="wrap_content"
@@ -135,13 +133,18 @@
                         android:progressDrawable="@drawable/pie_chart_state_progress"
                         android:indeterminate="false"
                         android:max="100" />
+                    <ImageView
+                        android:layout_width="@dimen/huge_space"
+                        android:layout_height="@dimen/huge_space"
+                        android:src="@drawable/pie_chart_inner_background"
+                        android:padding="15dp"/>
                     <TextView
                         android:id="@+id/progressPercentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:textSize="@dimen/medium_text"
+                        android:fontFamily="@font/opensans_light"
+                        android:textSize="@dimen/large_text"
                         android:textColor="@android:color/black" />
                 </RelativeLayout>
                 <TextView
@@ -151,116 +154,150 @@
                     android:text="@string/str_system_chart_desc"
                     android:fontFamily="@font/opensans_regular"
                     android:textSize="@dimen/small_text"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorDawn"
                     android:layout_marginTop="@dimen/small_space"/>
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/btnExpandPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/normal_space"
-            android:fontFamily="@font/opensans_regular"
-            android:textSize="@dimen/small_text"
-            android:textColor="@android:color/black"
-            android:text="@string/str_pick_value"/>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="1"
-            android:paddingHorizontal="@dimen/normal_space">
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn100"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+100MB" />
-                <Space
-                    android:layout_width="@dimen/normal_space"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/btn200"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+200MB" />
-                <Space
-                    android:layout_width="@dimen/normal_space"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/btn400"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+400MB" />
-            </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/normal_space"/>
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn500"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+500MB" />
-                <Space
-                    android:layout_width="@dimen/normal_space"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/btn700"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+700MB" />
-                <Space
-                    android:layout_width="@dimen/normal_space"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/btn1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/opensans_regular"
-                    android:background="@drawable/white_round_corner_background"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="+1GB" />
-            </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/normal_space"/>
-            <Button
-                android:id="@+id/btnCustom"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/normal_space"
+            android:paddingVertical="@dimen/small_space"
+            android:paddingHorizontal="@dimen/large_space"
+            android:background="@drawable/white_round_corner_background"
+            android:layout_gravity="center">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/normal_text"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/opensans_light"
+                android:text="@string/str_fill_mem"/>
+            <ImageView
+                android:id="@+id/icArrow"
+                android:layout_width="@dimen/normal_space"
+                android:layout_height="@dimen/normal_space"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/small_space"
+                android:src="@drawable/ic_down_arrow"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutValuePicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/small_space"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/normal_space"
                 android:fontFamily="@font/opensans_regular"
-                android:background="@drawable/white_round_corner_background"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:text="@string/str_custom" />
-        </GridLayout>
+                android:textSize="@dimen/small_text"
+                android:textColor="@android:color/black"
+                android:text="@string/str_pick_value"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:paddingHorizontal="@dimen/normal_space">
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+100MB" />
+                    <Space
+                        android:layout_width="@dimen/normal_space"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:id="@+id/btn200"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+200MB" />
+                    <Space
+                        android:layout_width="@dimen/normal_space"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:id="@+id/btn400"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+400MB" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/normal_space"/>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn500"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+500MB" />
+                    <Space
+                        android:layout_width="@dimen/normal_space"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:id="@+id/btn700"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+700MB" />
+                    <Space
+                        android:layout_width="@dimen/normal_space"
+                        android:layout_height="match_parent"/>
+                    <Button
+                        android:id="@+id/btn1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_regular"
+                        android:background="@drawable/white_round_corner_background"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:text="+1GB" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/normal_space"/>
+                <Button
+                    android:id="@+id/btnCustom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/white_round_corner_background"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="@string/str_other" />
+            </GridLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

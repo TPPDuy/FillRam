@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fill Ram Memory</string>
+    <string name="app_name">Fill RAM</string>
     <string name="tab_dump">Dump memory</string>
     <string name="tab_speed_up">Speed up</string>
     <string name="str_fill_mem">Fill Ram</string>
@@ -8,7 +8,7 @@
     <string name="str_available">Available</string>
     <string name="str_used_title">App Used</string>
     <string name="str_created">Created</string>
-    <string name="str_custom">Custom</string>
+    <string name="str_other">Other</string>
     <string name="str_system_chart_desc">(Available per Total)</string>
     <string name="str_pick_value">Pick a value below to fill Ram</string>
     <string name="str_app_chart_desc">(Created per Total)</string>

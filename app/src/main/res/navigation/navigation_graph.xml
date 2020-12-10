@@ -6,13 +6,13 @@
     app:startDestination="@id/systemInfoFragment">
     <fragment
         android:id="@+id/systemInfoFragment"
-        android:name="com.example.fillrammemory.controllers.GenVarFragment"
+        android:name="com.zing.zalo.fillrammemory.controllers.GenVarFragment"
         android:label="@string/tab_dump"
         tools:layout="@layout/fragment_gen_var">
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="com.example.fillrammemory.controllers.MemoryInfoFragment"
+        android:name="com.zing.zalo.fillrammemory.controllers.MemoryInfoFragment"
         android:label="@string/tab_speed_up"
         tools:layout="@layout/fragment_memory_info">
     </fragment>

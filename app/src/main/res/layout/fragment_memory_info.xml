@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
-    android:background="@color/colorPrimaryBackground">
+    android:background="@drawable/gradient_background">
     <RelativeLayout
         android:id="@+id/percentageHolder"
         android:layout_width="match_parent"
@@ -31,14 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_regular"
-                android:textColor="@color/colorLightGray"
+                android:textColor="@color/colorAthensGray"
                 android:textSize="@dimen/medium_text"
                 android:text="%"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_regular"
-                android:textColor="@color/colorLightGray"
+                android:textColor="@color/colorAthensGray"
                 android:textSize="@dimen/normal_text"
                 android:text="@string/str_used"/>
         </LinearLayout>
@@ -54,7 +54,7 @@
             android:background="@drawable/white_round_corner_background"
             android:fontFamily="@font/opensans_semibold"
             android:textSize="@dimen/normal_text"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorBlue"
             android:text="@string/str_speed_up" />
     </RelativeLayout>
 
@@ -69,7 +69,7 @@
             android:orientation="horizontal"
             android:padding="@dimen/normal_space"
             android:gravity="center_vertical"
-            android:background="@color/colorLightGray">
+            android:background="@color/colorGrayLight">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,14 +83,6 @@
                 android:text="@string/str_recent_use"
                 android:layout_marginStart="@dimen/small_space"
                 android:layout_weight="1"/>
-            <TextView
-                android:id="@+id/totalApps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_regular"
-                android:textSize="@dimen/small_text"
-                android:textColor="@color/colorPrimary"
-                android:visibility="gone"/>
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

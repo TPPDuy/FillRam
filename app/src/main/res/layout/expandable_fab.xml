@@ -82,7 +82,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:elevation="16dp"
         app:pressedTranslationZ="12dp"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorAcapulco"
         android:src="@drawable/ic_free_memory"
         app:fabSize="normal"/>
 </RelativeLayout>

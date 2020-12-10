@@ -1,0 +1,38 @@
+package com.zing.zalo.fillrammemory.controllers
+import android.os.*
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.zing.zalo.fillrammemory.R
+import com.zing.zalo.fillrammemory.utils.GetMemoryThread
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity(){
+
+    private lateinit var getMemoryThread: GetMemoryThread
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val navController = findNavController(R.id.nav_host_fragment)
+        NavigationUI.setupWithNavController(bottom_nav, navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getMemoryThread = GetMemoryThread("THREAD", this)
+        getMemoryThread.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        getMemoryThread.quitSafely()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        Log.d("Main Activity", "trim memory $level");
+    }
+}
+

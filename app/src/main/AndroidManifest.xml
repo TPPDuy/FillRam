@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.fillrammemory">
+    package="com.zing.zalo.fillrammemory">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
         android:largeHeap="true">
-        <activity android:name=".controllers.MainActivity">
+        <activity android:name="com.zing.zalo.fillrammemory.controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +28,11 @@
         </activity>
 
         <service
-            android:name=".services.MemoryService"
+            android:name="com.zing.zalo.fillrammemory.services.MemoryService"
             android:enabled="true"
             android:exported="false" />
         <receiver
-            android:name=".broadcast.NotificationBroadcast"
+            android:name="com.zing.zalo.fillrammemory.broadcast.NotificationBroadcast"
             android:enabled="true">
             <intent-filter>
                 <action android:name="FREE_ACTION"/>

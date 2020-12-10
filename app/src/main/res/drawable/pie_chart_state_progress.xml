@@ -7,8 +7,12 @@
         android:shape="ring"
         android:thickness="15dp"
         android:useLevel="true">
-        <solid
-            android:color="@color/colorPrimary"/>
+        <gradient
+            android:startColor="@color/colorOrangePale"
+            android:endColor="@color/colorOrangeDark"
+            android:angle="-180"
+            android:centerY="0.50"
+            android:type="sweep"/>
         <corners android:radius="@dimen/normal_space"/>
     </shape>
 </rotate>
