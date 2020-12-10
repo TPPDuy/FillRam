@@ -239,8 +239,8 @@ class MemoryService : Service() {
         var bytesValue =  MemoryUtils.convertValueToBytes(value, unit)
         val lastElementSize = mAllocations.getLastElement()?.capacity() ?: 0
         var newExtendSpace: ByteBuffer? = null
-        if (lastElementSize < Integer.MAX_VALUE){
-            val additionalSize = Integer.MAX_VALUE - lastElementSize
+        if (lastElementSize < Int.MAX_VALUE){
+            val additionalSize = if(lastElementSize + bytesValue < Int.MAX_VALUE) bytesValue else (Int.MAX_VALUE - lastElementSize).toLong()
             newExtendSpace = varExtend(mAllocations.removeLastElement(), (additionalSize + lastElementSize).toLong())
             if (newExtendSpace!=null) {
                 mAllocations.addVar(newExtendSpace)

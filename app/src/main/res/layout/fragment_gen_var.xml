@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
+
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_height="match_parent"
@@ -16,147 +17,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:weightSum="2"
-            android:paddingHorizontal="@dimen/normal_space">
-            <LinearLayout
-                android:layout_width="wrap_content"
+            android:weightSum="5"
+            android:paddingHorizontal="@dimen/small_space">
+            <include
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:baselineAligned="false">
-                <LinearLayout
-                    android:layout_width="@dimen/img_size_extra_medium"
-                    android:layout_height="@dimen/img_size_extra_medium"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/item_background"
-                    android:padding="@dimen/small_space">
-                    <TextView
-                        android:id="@+id/totalTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="@string/str_total"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorDawn" />
-                    <TextView
-                        android:id="@+id/totalValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/extra_small_space"
-                        android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/normal_text"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/normal_space"/>
-                <LinearLayout
-                    android:layout_width="@dimen/img_size_extra_medium"
-                    android:layout_height="@dimen/img_size_extra_medium"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/item_background"
-                    android:padding="@dimen/small_space">
-                    <TextView
-                        android:id="@+id/availableTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="@string/str_available"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorDawn" />
-                    <TextView
-                        android:id="@+id/availableValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/extra_small_space"
-                        android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/normal_text"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/normal_space"/>
-                <LinearLayout
-                    android:layout_width="@dimen/img_size_extra_medium"
-                    android:layout_height="@dimen/img_size_extra_medium"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/item_background"
-                    android:padding="@dimen/small_space">
-                    <TextView
-                        android:id="@+id/createdTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="@string/str_used_title"
-                        android:textSize="@dimen/small_text"
-                        android:textColor="@color/colorDawn" />
-                    <TextView
-                        android:id="@+id/createdValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/extra_small_space"
-                        android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/normal_text"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-            </LinearLayout>
-            <Space
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
+                layout="@layout/panel_ram_info"/>
+
+            <include
+                android:layout_weight="3.5"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:id="@+id/progressWrapper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-                    <ProgressBar
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="@dimen/huge_space"
-                        android:layout_height="@dimen/huge_space"
-                        android:layout_centerInParent="true"
-                        android:progressDrawable="@drawable/pie_chart_state_full"
-                        android:indeterminate="false"
-                        android:max="100"
-                        android:progress="100" />
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="@dimen/huge_space"
-                        android:layout_height="@dimen/huge_space"
-                        android:layout_centerInParent="true"
-                        android:progressDrawable="@drawable/pie_chart_state_progress"
-                        android:indeterminate="false"
-                        android:max="100" />
-                    <ImageView
-                        android:layout_width="@dimen/huge_space"
-                        android:layout_height="@dimen/huge_space"
-                        android:src="@drawable/pie_chart_inner_background"
-                        android:padding="15dp"/>
-                    <TextView
-                        android:id="@+id/progressPercentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/opensans_light"
-                        android:textSize="@dimen/large_text"
-                        android:textColor="@android:color/black" />
-                </RelativeLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/str_system_chart_desc"
-                    android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorDawn"
-                    android:layout_marginTop="@dimen/small_space"/>
-            </LinearLayout>
+                android:layout_width="0dp"
+                layout="@layout/pie_chart"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/btnExpandPicker"
@@ -307,6 +180,7 @@
         <include
             layout="@layout/expandable_fab" />
     </LinearLayout>
+
 
 </FrameLayout>
 

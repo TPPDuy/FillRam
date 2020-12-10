@@ -28,11 +28,15 @@ import com.zing.zalo.fillrammemory.viewModels.RunningAppsViewModel
 import kotlinx.android.synthetic.main.fragment_memory_info.*
 
 class MemoryInfoFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
-
+    companion object{
+        private val instance: MemoryInfoFragment = MemoryInfoFragment()
+        fun getInstance(): MemoryInfoFragment{
+            return instance
+        }
+    }
     private lateinit var memUsageAdapter: MemUsageAppAdapter
     private val viewModel: MemoryInfoViewModel by activityViewModels()
     private val runningAppsViewModel: RunningAppsViewModel by activityViewModels()
-    //private var isHigherAverageMem: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

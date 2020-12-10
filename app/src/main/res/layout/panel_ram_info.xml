@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:gravity="center_horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="@dimen/img_size_extra_medium"
+        android:layout_height="@dimen/img_size_extra_medium"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/item_background"
+        android:padding="@dimen/small_space">
+        <TextView
+            android:id="@+id/totalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="@string/str_total"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/colorDawn" />
+        <TextView
+            android:id="@+id/totalValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/extra_small_space"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="@dimen/normal_space"/>
+    <LinearLayout
+        android:layout_width="@dimen/img_size_extra_medium"
+        android:layout_height="@dimen/img_size_extra_medium"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/item_background"
+        android:padding="@dimen/small_space">
+        <TextView
+            android:id="@+id/availableTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="@string/str_available"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/colorDawn" />
+        <TextView
+            android:id="@+id/availableValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/extra_small_space"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="@dimen/normal_space"/>
+    <LinearLayout
+        android:layout_width="@dimen/img_size_extra_medium"
+        android:layout_height="@dimen/img_size_extra_medium"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/item_background"
+        android:padding="@dimen/small_space">
+        <TextView
+            android:id="@+id/createdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="@string/str_used_title"
+            android:textSize="@dimen/small_text"
+            android:textColor="@color/colorDawn" />
+        <TextView
+            android:id="@+id/createdValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/extra_small_space"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</LinearLayout>

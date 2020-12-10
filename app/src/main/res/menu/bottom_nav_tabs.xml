@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/systemInfoFragment"
-        android:icon="@drawable/ic_objects"
+        android:icon="@drawable/ic_fill_normal"
         android:title="@string/str_fill_mem"
         android:orderInCategory="1" />
     <item
         android:id="@+id/appInfoFragment"
-        android:icon="@drawable/ic_ram_usage"
+        android:icon="@drawable/ic_analytics_normal"
         android:title="@string/str_ram_usage"
         android:orderInCategory="2" />
 </menu>

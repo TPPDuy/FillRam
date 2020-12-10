@@ -26,7 +26,7 @@
         android:layout_marginTop="@dimen/medium_space"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:background="@drawable/blue_round_corner_background"
+        android:background="@drawable/primary_color_round_corner_background"
         android:padding="@dimen/normal_space"
         android:gravity="center"/>
 </LinearLayout>

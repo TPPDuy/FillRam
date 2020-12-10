@@ -34,7 +34,7 @@
         android:focusable="true"
         app:backgroundTint="#ffffff"
         app:pressedTranslationZ="12dp"
-        app:srcCompat="@drawable/ic_one_object"
+        app:srcCompat="@drawable/ic_custom_free"
         android:visibility="invisible"
         app:fabSize="normal"/>
 
@@ -67,7 +67,7 @@
         android:focusable="true"
         app:backgroundTint="@android:color/white"
         app:pressedTranslationZ="12dp"
-        app:srcCompat="@drawable/ic_objects"
+        app:srcCompat="@drawable/ic_free_all"
         android:visibility="invisible"
         app:fabSize="normal"/>
 
@@ -80,7 +80,7 @@
         android:layout_marginBottom="@dimen/normal_space"
         android:layout_marginEnd="@dimen/normal_space"
         android:background="?android:attr/selectableItemBackground"
-        android:elevation="16dp"
+        android:elevation="2dp"
         app:pressedTranslationZ="12dp"
         app:backgroundTint="@color/colorAcapulco"
         android:src="@drawable/ic_free_memory"
